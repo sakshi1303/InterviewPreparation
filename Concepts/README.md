@@ -1,1 +1,6 @@
+## Concepts
 
+1. Difference in ON conditions in Left Outer Join & Inner Join
+2. Pivot without using pivot function
+3. TO_DATE Function
+4. Advantages of using surrogate keys using natural keys
