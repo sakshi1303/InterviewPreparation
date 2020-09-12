@@ -1,7 +1,9 @@
 # InterviewPreparation
 
-|Topics|Feature|Status|
-|------|------|----|
+## Required
+
+|Topics|Status|
+|-|-|
 |SQL|Required||
 |DWH|Required||
 |Data Modeling|Required||
