@@ -6,6 +6,7 @@
 |Set 5 examples|Required||
 |Dictionary 5 examples|Required||
 |Tuple 5 examples|Required||
+|For & while loop 5 examples|Required||
 |Pandas DataFrame 5 examples|Required||
 |Merge Sort|Required||
 |Heap Sort|Required||
