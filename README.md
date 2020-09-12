@@ -1,10 +1,7 @@
 # InterviewPreparation
 
-## Python
-
-Algorithms
-
-|Topics|Status|
-|------|------|
-|Heap Sort|Done|
+|Topics|Feature|Status|
+|------|------|----|
+|SQL|Required||
+||||
 
