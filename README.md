@@ -2,10 +2,27 @@
 
 ## Required
 
-:white_check_mark: SQL
-:white_check_mark: DWH
-:white_check_mark: Data Modeling
-:white_check_mark: Python
-:white_check_mark: AWS
-:white_check_mark: Big Data
-:white_check_mark: Complex Project
+[comment]: # (Use :black_square_button: for uncomplete tasks and :white_check_mark: for completed tasks. )
+
+:black_square_button: SQL
+
+
+:black_square_button: DWH
+
+
+:black_square_button: Data Modeling
+
+
+:black_square_button: Python
+
+
+:black_square_button: AWS
+
+
+:black_square_button: Big Data
+
+
+:black_square_button: Complex Project
+
+
+:black_square_button: Current Project
