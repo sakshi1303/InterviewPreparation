@@ -1,3 +1,3 @@
-|Table|Feature|Status|
+|Topics|Feature|Status|
 |----|----|----|
 |Interview Questions|Required|||
