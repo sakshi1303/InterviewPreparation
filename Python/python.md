@@ -438,9 +438,9 @@ print(type(my_tuple))
 3<br/>
 4.6<br/>
 dog<br/>
-<class 'str'><br/>
-<class 'tuple'><br/>
-<class 'tuple'><br/>
+class 'str'<br/>
+class 'tuple'<br/>
+class 'tuple'<br/>
 </details>
 
 #### Example 3
@@ -479,7 +479,6 @@ print(my_tuple[:-7])
 print(my_tuple[7:])
 print(my_tuple[:])
 
-
 my_tuple = (4, 2, 3, [6, 5])
 ##my_tuple[1] = 9
 
@@ -491,12 +490,12 @@ print(my_tuple)
 ```
 <details>
 <summary>Answer</summary>
-('r', 'o', 'g')
-('p', 'r')
-('i', 'z')
-('p', 'r', 'o', 'g', 'r', 'a', 'm', 'i', 'z')
-(4, 2, 3, [9, 5])
-('p', 'r', 'o', 'g', 'r', 'a', 'm', 'i', 'z')
+('r', 'o', 'g')<br/>
+('p', 'r')<br/>
+('i', 'z')<br/>
+('p', 'r', 'o', 'g', 'r', 'a', 'm', 'i', 'z')<br/>
+(4, 2, 3, [9, 5])<br/>
+('p', 'r', 'o', 'g', 'r', 'a', 'm', 'i', 'z')<br/>
 </details>
 
 #### Example 5
