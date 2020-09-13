@@ -1,15 +1,10 @@
 ## List 
 
+#### Example 1
 ```python
 my_list = []
 print(my_list)
-```
-<details>
-<summary>Answer</summary>
-[]
-</details>
 
-```
 my_list = [1, 2, 3]
 print(my_list)
 
@@ -18,30 +13,66 @@ print(my_list)
 
 my_list = ["mouse", [8,4,6], ['a']]
 print(my_list)
+```
+<details>
+<summary>Answer</summary>
+[]<br/>
+[1, 2, 3]<br/>
+[1, 'Hello', 3.4]<br/>
+['mouse', [8, 4, 6], ['a']]<br/>
+</details>
 
+#### Example 2
+```python
 my_list = ['p', 'r', 'o', 'b', 'e']
 print(my_list[0])
 print(my_list[2])
 print(my_list[4])
 print(my_list[-1])
 print(my_list[-5])
+```
 
+<details>
+<summary>Answer</summary>
+p
+o
+e
+e
+p
+</details>
+
+#### Example 3
+```python
 n_list = ["Happy", [2, 0, 1, 5]]
-
 print(n_list[0][1])
 print(n_list[1][3])
-
 ##print(n_list[4.0])  -- Error
+```
+<details>
+<summary>Answer</summary>
+p
+a
+5
+</details>   
 
-
+#### Example 4
+```python
 my_list = ['p','r','o','g','r','a','m','i','z']
-
 print(my_list[2:5])
 print(my_list[:-5])
 print(my_list[5:])
 print(my_list[:])
+```
+<details>
+<summary>Answer</summary>
+['o', 'g', 'r']<br/>
+['p', 'r', 'o', 'g']<br/>
+['a', 'm', 'i', 'z']<br/>
+['p', 'r', 'o', 'g', 'r', 'a', 'm', 'i', 'z']<br/>
+</details>  
 
-
+#### Example 5
+```python
 odd = [2, 4, 6, 8]
 odd[0] = 1
 print(odd)
@@ -51,12 +82,10 @@ print(odd)
 
 odd = [1, 3, 5]
 odd.append(7)
-
 print(odd)
 
 odd.extend([9, 11, 13])
 print(odd)
-
 
 odd = [1, 3, 5]
 print(odd + [9, 7, 5])
@@ -65,15 +94,28 @@ print(['re'] * 3)
 
 odd = [1, 9]
 odd.insert(1, 3)
-
 print(odd)
 
 odd[2:2] = [5, 7]
-
 print(odd)
+```
 
+<details>
+<summary>Answer</summary>
+[1, 4, 6, 8]<br/>
+[1, 3, 5, 7]<br/>
+[1, 3, 5, 7]<br/>
+[1, 3, 5, 7, 9, 11, 13]<br/>
+[1, 3, 5, 9, 7, 5]<br/>
+['re', 're', 're']<br/>
+[1, 3, 9]<br/>
+[1, 3, 5, 7, 9]<br/>
+</details> 
+
+#### Example 6
+
+```python
 my_list = ['p', 'r', 'o', 'b', 'l', 'e', 'm']
-
 del my_list[2]
 print(my_list)
 
@@ -82,7 +124,6 @@ print(my_list)
 
 del my_list
 ##print(my_list)  -- Error
-
 
 my_list = ['p','r','o','b','l','e','m']
 my_list.remove('p')
@@ -94,7 +135,6 @@ print(my_list.pop())
 print(my_list)
 
 my_list.clear()
-
 print(my_list)
 
 my_list = ['p','r','o','b','l','e','m']
@@ -104,8 +144,24 @@ print(my_list)
 
 my_list[2:5] = []
 print(my_list)
+```
 
+<details>
+<summary>Answer</summary>
+['p', 'r', 'b', 'l', 'e', 'm']<br/>
+['p', 'm']<br/>
+o<br/>
+['r', 'b', 'l', 'e', 'm']<br/>
+m<br/>
+['r', 'b', 'l', 'e']<br/>
+[]<br/>
+['p', 'r', 'b', 'l', 'e', 'm']<br/>
+['p', 'r', 'm']<br/>
+</details> 
 
+#### Example 7
+
+```python
 my_list = [3, 8, 1, 6, 0, 8, 4]
 print(my_list.index(8))
 print(my_list.count(8))
@@ -142,6 +198,24 @@ print('c' not in my_list)
 for fruit in ['apple', 'banana', 'mango']:
     print('I like', fruit)
 ```
+
+<details>
+<summary>Answer</summary>
+1<br/>
+2<br/>
+[0, 1, 3, 4, 6, 8, 8]<br/>
+[8, 8, 6, 4, 3, 1, 0]<br/>
+[1, 2, 4, 8, 16, 32, 64, 128, 256, 512]<br/>
+[64, 128, 256, 512]<br/>
+[1, 3, 5, 7, 9, 11, 13, 15, 17, 19]<br/>
+['Python Language', 'Python Programming', 'C Language', 'C Programming']<br/>
+True<br/>
+False<br/>
+True<br/>
+I like apple<br/>
+I like banana<br/>
+I like mango<br/>
+</details> 
 
 ## Set
 
