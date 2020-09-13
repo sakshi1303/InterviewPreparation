@@ -80,3 +80,41 @@ where in_out='IN'
 group by empid ;
 ```
 </details>
+
+## Batsman Outscoring Himself
+
+```sql
+drop table ipl_batsman_score ;
+create table ipl_batsman_score
+(batsman_id number , match_id number, score number);
+
+insert all
+into ipl_batsman_score values (1,1,10)
+into ipl_batsman_score values (1,2,15)
+into ipl_batsman_score values (1,3,100)
+into ipl_batsman_score values (2,1,101)
+into ipl_batsman_score values (2,2,115)
+into ipl_batsman_score values (2,3,90)
+into ipl_batsman_score values (1,4,45)
+into ipl_batsman_score values (1,5,155)
+into ipl_batsman_score values (1,6,60)
+into ipl_batsman_score values (2,4,10)
+into ipl_batsman_score values (2,5,20)
+into ipl_batsman_score values (2,6,100)
+select 1 from dual;
+```
+<details>
+<summary>Answer</summary>
+
+```sql
+select batsman_id, count(*)
+from
+(select batsman_id, match_id, score , rank() over (partition by batsman_id order by score) rn
+from ipl_batsman_score i1 
+where i1.score > ALL( select i2.score from ipl_batsman_score i2 
+                      where i1.batsman_id  = i2.batsman_id 
+                      and i1.match_id  > i2.match_id  )
+)where rn <> 1
+group by batsman_id;
+```
+</details>  
