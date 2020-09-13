@@ -269,12 +269,12 @@ print(my_set)
 
 <details>
 <summary>Answer</summary>
-<class 'dict'>
-<class 'set'>
-{1, 3}
-{1, 2, 3}
-{1, 2, 3, 4}
-{1, 2, 3, 4, 5, 6, 8}
+class 'dict'<br/>
+class 'set'<br/>
+{1, 3}<br/>
+{1, 2, 3}<br/>
+{1, 2, 3, 4}<br/>
+{1, 2, 3, 4, 5, 6, 8}<br/>
 </details> 
 
 #### Example 3
