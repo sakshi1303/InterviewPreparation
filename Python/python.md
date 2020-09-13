@@ -387,6 +387,8 @@ frozenset({1, 2, 3, 4, 5, 6})<br/>
 
 ## Tuple
 
+#### Example 1
+
 ```python
 my_tuple = ()
 print(my_tuple)
@@ -399,7 +401,18 @@ print(my_tuple)
 
 my_tuple = ('mouse', [8,4,6], (1,2,3))
 print(my_tuple)
+```
+<details>
+<summary>Answer</summary>
+()<br/>
+(1, 2, 3)<br/>
+(1, 'Hello', 3.4)<br/>
+('mouse', [8, 4, 6], (1, 2, 3))<br/>
+</details>    
 
+#### Example 2
+
+```python
 ## packing
 my_tuple = 3, 4.6, 'dog'
 print(my_tuple)
@@ -418,12 +431,24 @@ print(type(my_tuple))
 
 my_tuple = "hello",
 print(type(my_tuple))
+```
+<details>
+<summary>Answer</summary>
+(3, 4.6, 'dog')<br/>
+3<br/>
+4.6<br/>
+dog<br/>
+<class 'str'><br/>
+<class 'tuple'><br/>
+<class 'tuple'><br/>
+</details>
 
+#### Example 3
 
+```python
 my_tuple = ('p','e','r','m','i','t')
 print(my_tuple[0])
 print(my_tuple[5])
-
 
 ##print(my_tuple[6])
 ##print(my_tuple[2.0])
@@ -432,12 +457,22 @@ n_tuple = ("mouse", [8, 4, 6], (1, 2, 3))
 print(n_tuple[0][3])
 print(n_tuple[1][1])
 
-
 my_tuple = ('p','e','r','m','i','t')
 print(my_tuple[-1])
 print(my_tuple[-6])
+```
+<details>
+<summary>Answer</summary>
+p
+t
+s
+4
+t
+p
+</details>   
 
-
+#### Example 4
+```python
 my_tuple = ('p','r','o','g','r','a','m','i','z')
 print(my_tuple[1:4])
 print(my_tuple[:-7])
@@ -453,19 +488,35 @@ print(my_tuple)
 
 my_tuple = ('p', 'r', 'o', 'g', 'r', 'a', 'm', 'i', 'z')
 print(my_tuple)
+```
+<details>
+<summary>Answer</summary>
+('r', 'o', 'g')
+('p', 'r')
+('i', 'z')
+('p', 'r', 'o', 'g', 'r', 'a', 'm', 'i', 'z')
+(4, 2, 3, [9, 5])
+('p', 'r', 'o', 'g', 'r', 'a', 'm', 'i', 'z')
+</details>
 
-
+#### Example 5
+```python
 print((1,2,3) + (4,5,6))
 print(("Repeat",) * 3)
-
 
 my_tuple = ('p', 'r', 'o', 'g', 'r', 'a', 'm', 'i', 'z')
 ##del my_tuple[3]
 
 del my_tuple
 ##print(my_tuple)
+```
+<details>
+<summary>Answer</summary>
+(1, 2, 3, 4, 5, 6)<br/>
+('Repeat', 'Repeat', 'Repeat')<br/>
+</details>
 
-
+```python
 my_tuple = ('a', 'p', 'p', 'l', 'e',)
 print(my_tuple.count('p'))
 print(my_tuple.index('l'))
@@ -476,11 +527,19 @@ print('a' in my_tuple)
 print('b' in my_tuple)
 print('g' not in my_tuple)
 
-
 for name in ('John', 'Kate'):
     print("Hello", name)
-
 ```
+<details>
+<summary>Answer</summary>
+2<br/>
+3<br/>
+True<br/>
+False<br/>
+True<br/>
+Hello John<br/>
+Hello Kate<br/>
+</details>
 
 ## Dictionary
 
