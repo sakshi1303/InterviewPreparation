@@ -497,3 +497,119 @@ Inside Loop<br/>
 Inside Loop<br/>
 Inside else<br/>
 </details>
+
+## Pandas DataFrame
+
+#### Example 1
+
+```python
+import pandas as pd
+lst = ['Geeks','For','Geeks','is','portal','for','Geeks']
+df = pd.DataFrame(lst)
+print(df)
+```
+<details>
+<summary>Answer</summary>
+        0<br/>
+0   Geeks<br/>
+1     For<br/>
+2   Geeks<br/>
+3      is<br/>
+4  portal<br/>
+5     for<br/>
+6   Geeks<br/>
+</details>
+
+#### Example 2
+
+```python
+import pandas as pd
+data  = {'Name' : ['Tom', 'Nick', 'Krish', 'Jack'],
+         'Age' : [20, 21, 19, 28]}
+df = pd.DataFrame(data)
+print(df)
+```
+<details>
+<summary>Answer</summary>
+    Name  Age<br/>
+0    Tom   20<br/>
+1   Nick   21<br/>
+2  Krish   19<br/>
+3   Jack   28<br/>    
+</details>
+
+#### Example 3
+
+```python
+import pandas as pd
+data = pd.read_csv('emp.csv', index_col='emp_name', delimiter='|')
+first = data.loc['John Doe']
+second = data.loc['Tony Stark']
+print(first, '\n\n\n', second)
+```
+<details>
+<summary>Answer</summary>
+emp_id                         1<br/>
+emp_age                       30<br/>
+emp_address               London<br/>
+email          john.doe@mail.com<br/>
+contact_no             987654321<br/>
+dept                          HR<br/>
+salary                     50000<br/>
+Name: John Doe, dtype: object<br/>
+<br/>
+emp_id                           5<br/>
+emp_age                         33<br/>
+emp_address               New York<br/>
+email          tony.stark@mail.com<br/>
+contact_no              2345671267<br/>
+dept                       FINANCE<br/>
+salary                       45000<br/>
+Name: Tony Stark, dtype: object<br/>
+</details>
+
+#### Example 4
+
+```python
+import pandas as pd
+data = pd.read_csv('emp.csv', index_col='emp_name', delimiter='|')
+row = data.iloc[3]
+print(row)
+```
+<details>
+<summary>Answer</summary>
+emp_id                          4<br/>
+emp_age                        29<br/>
+emp_address                Canada<br/>
+email          tom.gibbs@mail.com<br/>
+contact_no             8769342104<br/>
+dept                           IT<br/>
+salary                      55000<br/>
+Name: Tom Gibbs, dtype: object<br/>
+</details>
+
+#### Example 5
+
+```python
+import pandas as pd
+import numpy as np
+dict = {'First Score':[100,90,np.nan,95],
+        'Second Score':[30,np.nan,45,56],
+        'Third Score':[52,40,80,98],
+        'Fourth Score':[np.nan,np.nan,np.nan,65]
+        }
+df = pd.DataFrame(dict)
+df.fillna(0)
+df.dropna()
+print(df)
+```
+<details>
+<summary>Answer</summary>
+   First Score  Second Score  Third Score  Fourth Score<br/>
+0        100.0          30.0           52           0.0<br/>
+1         90.0           0.0           40           0.0<br/>
+2          0.0          45.0           80           0.0<br/>
+3         95.0          56.0           98          65.0<br/>
+   First Score  Second Score  Third Score  Fourth Score<br/>
+3         95.0          56.0           98          65.0<br/>
+</details>
