@@ -418,7 +418,7 @@ group by batsmen_id, year )) where inc_pct > 15;
 
 </details>  
 
-## Check which department has more combined salary than 500000.
+## Check which department has more combined salary than 500000
 
 ```sql
 create table emp
@@ -457,150 +457,17 @@ having sum(salary) > 500000;
 ```
 </details>
 
-## Student class and schools.
-
-<details>
-<summary>Answer</summary>
-Preaggregate class and school attendance.
-</details>
-
-## Role Playing Dimensions.
-
-<details>
-<summary>Answer</summary>
-One dimension which can be used in multiple ways just like Date dimension.
-  
-A single physical dimension can be referenced multiple times in a fact table, with each reference linking to a logically distinct role for the dimension. For instance, a fact table can have several dates, each of which is represented by a foreign key to the date dimension.  It is essential that each foreign key refers to a separate view of the date dimension so that the references are independent. These separate dimension views (with unique attribute column names) are called roles.
-
-</details>
-
-## Compare current week’s data to previous year’s  corresponding week’s data.
+## Compare current week’s data to previous year’s corresponding week’s data
 
 <details>
 <summary>Answer</summary>
   
 ```sql
-select (next_day(trunc(sysdate+10),'MONDAY') - next_day(trunc(sysdate,'YYYY')- 7 , 'MONDAY'))/7 from dual;
-
 select ROUND((to_date('20-APR-2020','DD-MON-YYYY') - to_date('01-JAN-2020','DD-MON-YYYY'))/7)+1 from dual;
-
 ```
-</details>
-
-## SQL for Merge SCD2 Type
-
-```sql
-
-create table stg_dim(
-natural_key varchar2(100),
-col1 varchar2(100),
-col2 varchar2(100));
-
-create table dim(
-dim_key number,
-natural_key varchar2(100),
-col1 varchar2(100),
-col2 varchar2(100),
-eff_dt date ,
-exp_dt date default to_date('99991231','YYYYMMDD') NOT NULL);
-
-drop table dim ;
-drop table stg_dim ;
-
-insert into stg_dim values ('ABC','a','b');
-insert into stg_dim values ('XYZ','g','r');
-insert into stg_dim values ('YUI','d','o');
-
-insert into dim values(1,'ABC','a','c',to_date('20190701','YYYYMMDD'),to_date('20190708','YYYYMMDD'));
-insert into dim values(2,'ABC','a','d',to_date('20190709','YYYYMMDD'),to_date('99991231','YYYYMMDD'));
-insert into dim values(3,'XYZ','g','s',to_date('20190706','YYYYMMDD'),to_date('99991231','YYYYMMDD'));
-
-```
-
-<details>
-<summary>Answer</summary>
-  
-```sql
-
-merge into dim d using(
-select sd1.* , 'U' upd_ind , d1.dim_key from 
-stg_dim sd1
-left join 
-dim d1 on d1.natural_key=sd1.natural_key and d1.exp_dt=to_date('99991231','YYYYMMDD') 
-union all
-select sd2.* ,'I' upd_ind , null dim_key from stg_dim sd2) s
-on (s.dim_key=d.dim_key )
-when matched  then
-update set d.exp_dt=sysdate - 1 where upd_ind='U'
-when not matched  then
-insert values ( 1,s.natural_key,s.col1,s.col2,trunc(sysdate),to_date('99991231','YYYYMMDD'))
-where upd_ind='I';
-
-select * from dim ;
-```
-
-</details>
-  
-## Hotel reservation data model
-
-<details>
-<summary>Answer</summary>
-
-```sql
-create table hotel_tables(
-hotel_table_id number,
-hotel_table_capacity number);
-
-select * 
-from 
-hotel_tables 
-left outer join 
-booking 
-on ht.hotel_table_id=b.hotel_table_id
-and b.date=:date
-and b.time between :time-15 and :time+15
-where 
-b.hotel_table_id is null
-and ht.hotel_table_capacity = :capacity;
-```
-
-```sql
-create table hotel (hotel_id number);
-insert into hotel values (1);
-insert into hotel values (2);
-
-create table seats (seatid number, seattype number);
-insert into seats values (1, 1);
-insert into seats values (2, 2);
-insert into seats values (3, 2);
-insert into seats values (4, 4);
-insert into seats values (5, 4);
-insert into seats values (6, 2);
-
-create table booking (booking_id number, hotel_id number, seat_id number, booking_date date, booking_time varchar2(20));
-insert into booking values (1, 1 , 2, '08-APR-2020', '8PM');
-insert into booking values (2, 1 , 3, '09-APR-2020', '8PM');
-insert into booking values (3, 1 , 4, '10-APR-2020', '9PM');
-insert into booking values (4, 1 , 1, '09-APR-2020', '8PM');
-insert into booking values (5, 1 , 5, '08-APR-2020', '9PM');
-insert into booking values (6, 1 , 2, '09-APR-2020', '8PM');
-
-select s1.seatid, b1.* 
-from seats s1 left outer join booking b1 
-on s1.seatid = b1.seat_id 
-and b1.booking_date = '09-APR-2020' and b1.booking_time = '8PM'
-where b1.seat_id is null 
-
-```
-
-
 </details>
 
 ## Last 3 orders of a customer
-
-<details>
-<summary>Answer</summary>
-
 ```sql
 create table orders(
 order_id number,
@@ -623,15 +490,6 @@ address_line_3 varchar2(50),
 pin number,
 state varchar2(50));
 
-select * from 
-orders join
-order_line  using(order_id)
-join 
-deliver_address using(delivery_address_id)
-where customer_id= :customer_id ;
-
-```
-```sql
 insert into orders values(1, 1, to_date('08-APR-2020','DD-MON-YYYY'),'10AM',500);
 insert into orders values(2, 1, to_date('09-APR-2020','DD-MON-YYYY'),'10AM',700);
 insert into orders values(3, 2, to_date('08-APR-2020','DD-MON-YYYY'),'9AM',400);
@@ -653,7 +511,11 @@ insert into deliver_address values(2,'402 house','sector52','dwarka',110201,'Del
 insert into deliver_address values(3,'pratap','nagar',null,110310,'Delhi');
 insert into deliver_address values(4,'palm greens','sector90','aerospace',110402,'Gurgaon');
 insert into deliver_address values(5,'50garden','greens','southex',110120,'Delhi');
+```
+<details>
+<summary>Answer</summary>
 
+```sql
 select * from 
 (select  o.*, da.delivery_address_id,
 dense_rank() over (order by o.order_id desc) rn
@@ -661,16 +523,11 @@ from orders o join order_line ol on o.order_id = ol.order_id
 join deliver_address da on ol.delivery_address_id = da.delivery_address_id
 where o.customer_id = 1 
 ) where rn <=3;
-
 ```
 
 </details>
 
 ## Top five views per year and increase consistent views per year
-
-<details>
-<summary>Answer</summary>
-
 ```sql
 create table song_dim (
 song_id number,
@@ -685,30 +542,6 @@ create table date_dim(
 eff_dt date,
 eff_year number
 );
-
-
-select song_id , eff_year , song_pop from(
-select song_id , eff_year , dense_rank() over(partition by song_id, eff_year order by song_pop desc) rnk, song_pop from(
-select 
-vf.song_id , dd.eff_year , count(vf.views) song_pop
-from views_fact vf
-join date_dim dd
-using(eff_dt)
--- join song_dim sd
--- using(song_id)
-group by vf.song_id , dd.eff_year)) where rnk >= 5;
-
-with t as (
-select 
-vf.song_id , dd.eff_year , count(vf.views) song_pop
-from views_fact vf
-join date_dim dd
-using(eff_dt)
--- join song_dim sd
--- using(song_id)
-group by vf.song_id , dd.eff_year))
-select song_id , eff_year , song_pop 
-from t t1 where t1.song_pop >=ALL(select t2.song_pop from t t2 where t1.song_id=t2.song_id AND t2.eff_year between t1.eff_year -2 and t1.eff_year );
 
 insert into song_dim values(1, 'coldplay');
 insert into song_dim values(2, 'somebody');
@@ -750,7 +583,12 @@ insert into date_dim values(to_date('08-AUG-2019','DD-MON-YYYY'), 2019);
 insert into date_dim values(to_date('09-AUG-2019','DD-MON-YYYY'), 2019);
 insert into date_dim values(to_date('10-AUG-2019','DD-MON-YYYY'), 2019);
 insert into date_dim values(to_date('16-AUG-2019','DD-MON-YYYY'), 2019);
+```
 
+<details>
+<summary>Answer</summary>
+
+```sql
 select * from
 (
 select sv.*, dense_rank() over (order by sv.sum_views desc) rn
@@ -774,17 +612,11 @@ group by vf.song_id, dd.eff_year
 order by vf.song_id, dd.eff_year
 ) sv
 ) where diff > 0;
-
-
 ```
 
 </details>
 
 ## Pivot without using pivot function
-
-<details>
-<summary>Answer</summary>
-  
 ```sql
 
 create table emp
@@ -801,7 +633,12 @@ insert into emp values(5, 3, 400000);
 insert into emp values(6, 3, 100000);
 insert into emp values(7, 4, 800000);
 insert into emp values(8, 5, 200000);
+```
 
+<details>
+<summary>Answer</summary>
+
+```sql
 with temp as
 (
 select
@@ -869,8 +706,9 @@ and o1.order_day = o2.order_day
 and o1.processing_day > o2.processing_day
 group by o1.order_day, o1.order_id, o1.processing_day
 order by 1, 2
-
 ```
+
+#### Generic Query for lag without lag function
 
 ``` sql
 create table tab1(col1 number);
@@ -886,12 +724,10 @@ insert into tab1 values (7);
 select * from tab1 t1 left outer join tab1 t2 on t1.col1 > t2.col1
 and t2.col1 = (select max(t3.col1) from tab1 t3 where t3.col1 < t1.col1)
 
-
 select t1.col1, max(t2.col1)
 from tab1 t1 left outer join tab1 t2 on t1.col1 > t2.col1
 group by t1.col1
 order by t1.col1;
-
 ```
 
 </details>
@@ -900,15 +736,7 @@ order by t1.col1;
 
 Empid | Manager_id
 
-<details>
-<summary>Answer</summary>
-
 ```sql
-select e1.ename  from scott.emp e1 
-left outer join 
-(select e.mgr emp from scott.emp e group by mgr having count(*) > 3) e2
-on e1.empno=e2.emp;
-
 create table emp
 ( empid number,
   ename varchar2(50),
@@ -923,7 +751,16 @@ insert into emp values(4,'Mac',2,null);
 insert into emp values(5,'Paul',2,4);
 insert into emp values(6,'Elsa',2,5);
 insert into emp values(7,'Belly',2,5);
+```
 
+<details>
+<summary>Answer</summary>
+
+```sql
+select e1.ename  from scott.emp e1 
+left outer join 
+(select e.mgr emp from scott.emp e group by mgr having count(*) > 3) e2
+on e1.empno=e2.emp;
 ```
 </details>
 
