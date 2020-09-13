@@ -118,3 +118,119 @@ where i1.score > ALL( select i2.score from ipl_batsman_score i2
 group by batsman_id;
 ```
 </details>  
+
+## Begin and End Price
+
+```sql
+drop table price ;
+create table price ( product_id varchar2(50), price number , effective_date date);
+
+insert into price values (1,400,to_Date('01-Jan-2019','DD-MON-YYYY'));
+insert into price values (2,300,to_Date('01-Jan-2019','DD-MON-YYYY'));
+insert into price values (1,400,to_Date('02-Jan-2019','DD-MON-YYYY'));
+insert into price values (2,300,to_Date('02-Jan-2019','DD-MON-YYYY'));
+insert into price values (1,500,to_Date('03-Jan-2019','DD-MON-YYYY'));
+insert into price values (2,300,to_Date('03-Jan-2019','DD-MON-YYYY'));
+insert into price values (1,500,to_Date('04-Jan-2019','DD-MON-YYYY'));
+insert into price values (2,300,to_Date('04-Jan-2019','DD-MON-YYYY'));
+insert into price values (1,600,to_Date('05-Jan-2019','DD-MON-YYYY'));
+insert into price values (2,400,to_Date('05-Jan-2019','DD-MON-YYYY'));
+insert into price values (1,600,to_Date('06-Jan-2019','DD-MON-YYYY'));
+insert into price values (2,400,to_Date('06-Jan-2019','DD-MON-YYYY'));
+```
+<details>
+<summary>Answer</summary>
+
+```sql
+select min(effective_date) begin_dt , max(effective_Date) end_dt , price , product_id  from(
+select 
+sum(case when lag_price <> price then 1 else 0 end) over(partition by product_id order by effective_Date ) rng , product_id , effective_Date, price
+from
+(select lag(price) over(partition by product_id order by effective_Date)  lag_price , price , effective_Date, product_id  from price ))
+group by price , product_id , rng;
+```
+</details>
+
+## Consecutive winning streak
+
+```sql
+create table MATCH_RESULTS
+(
+MATCH_ID NUMBER GENERATED ALWAYS AS IDENTITY,
+TEAMA VARCHAR2(255),
+TEAMB VARCHAR2(255),
+WINNER VARCHAR2(255)
+);
+
+insert into MATCH_RESULTS (TEAMA, TEAMB, WINNER) VALUES('IND','WI','WI');
+insert into MATCH_RESULTS (TEAMA, TEAMB, WINNER) VALUES('SA','WI','WI');
+insert into MATCH_RESULTS (TEAMA, TEAMB, WINNER) VALUES('IND','AUS','IND');
+insert into MATCH_RESULTS (TEAMA, TEAMB, WINNER) VALUES('WI','ENG','WI');
+insert into MATCH_RESULTS (TEAMA, TEAMB, WINNER) VALUES('PAK','WI','PAK');
+insert into MATCH_RESULTS (TEAMA, TEAMB, WINNER) VALUES('IND','SA','IND');
+insert into MATCH_RESULTS (TEAMA, TEAMB, WINNER) VALUES('SA','ENG','ENG');
+insert into MATCH_RESULTS (TEAMA, TEAMB, WINNER) VALUES('ENG','AUS','AUS');
+insert into MATCH_RESULTS (TEAMA, TEAMB, WINNER) VALUES('AUS','PAK','AUS');
+insert into MATCH_RESULTS (TEAMA, TEAMB, WINNER) VALUES('PAK','WI','WI');
+insert into MATCH_RESULTS (TEAMA, TEAMB, WINNER) VALUES('WI','IND','IND');
+insert into MATCH_RESULTS (TEAMA, TEAMB, WINNER) VALUES('IND','ENG','IND');
+insert into MATCH_RESULTS (TEAMA, TEAMB, WINNER) VALUES('IND','PAK','IND');
+insert into MATCH_RESULTS (TEAMA, TEAMB, WINNER) VALUES('WI','AUS','WI');
+insert into MATCH_RESULTS (TEAMA, TEAMB, WINNER) VALUES('ENG','WI','WI');
+insert into MATCH_RESULTS (TEAMA, TEAMB, WINNER) VALUES('ENG','SA','ENG');
+insert into MATCH_RESULTS (TEAMA, TEAMB, WINNER) VALUES('ENG','IND','ENG');
+```
+
+<details>
+<summary>Answer</summary>
+
+```sql
+with temp as
+(
+select teama, count(res) cnt from
+(
+select teama, match_id, winner,
+sum(case when winner <> prev then 1 else 0 end) over(partition by teama order by match_id) res
+from
+(
+select m2.teama, m1.match_id, m1.winner, 
+lag(m1.winner) over (partition by m2.teama order by match_id) prev
+from match_results m1
+join 
+(select distinct teama from match_results
+union
+select distinct teamb from match_results) m2
+on (m2.teama = m1.teama or m2.teama = m1.teamb)
+)
+)
+group by teama, res
+order by teama, res
+)
+select teama, cnt from temp where
+cnt = (select max(cnt) from temp); 
+```
+</details>
+
+## Users were active in the month of January
+
+```sql
+create table user_details 
+( user_id NUMBER GENERATED ALWAYS AS IDENTITY,
+start_dt DATE , 
+end_dt DATE );
+
+insert into user_Details(start_dt,end_dt) values ('01-Jul-2019','01-Aug-2019');
+insert into user_Details(start_dt,end_dt) values ('01-Jul-2019','01-Jan-2020');
+insert into user_Details(start_dt,end_dt) values ('01-Jan-2020','31-Jan-2020');
+insert into user_Details(start_dt,end_dt) values ('15-Jan-2020','01-Feb-2020');
+insert into user_Details(start_dt,end_dt) values ('01-Feb-2020','10-Feb-2020');
+insert into user_Details(start_dt,end_dt) values ('01-Jul-2019','10-Feb-2020');
+```
+<details>
+<summary>Answer</summary>
+  
+```sql
+select * from user_details where end_dt >= '01-Jan-2020' and start_dt <='31-Jan-2020' ; 
+```
+
+</details>  
