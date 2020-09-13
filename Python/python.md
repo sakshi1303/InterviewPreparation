@@ -810,3 +810,37 @@ Enter the key:<br/>
 0<br/>
 Key not found<br/>
 </details>
+
+## Find all files in a directory with last name as .pyc (in python and UNIX)
+
+<details>
+<summary>Answer</summary>
+
+```python
+import os
+ for path, dirs, files in os.walk('.'):
+     for file in files :
+         if file.endswith('.pyc'):
+             print(file)
+```
+```unix
+find . -name "*.pyc"
+```
+</details>
+
+## Find minimum number of changes in a string to convert it into Palindrome
+
+<details>
+<summary>Answer</summary>
+    
+```python
+def palindrome(string): 
+    cnt_steps=0 
+    for i in range(len(string)//2): 
+        if string[i] != string[(i+1)*-1]: 
+            cnt_steps=cnt_steps + 1 
+    return cnt_steps 
+res = palindrome('00001100')
+print(res)
+```
+</details>
