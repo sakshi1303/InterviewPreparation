@@ -350,13 +350,12 @@ print(B.symmetric_difference(A))
 {1, 2, 3, 6, 7, 8}<br/>
 </details>  
 
+#### Example 5
 ```python
-
 my_set = set("apple")
 print('a' in my_set)
 print('b' in my_set)
 print('b' not in my_set)
-
 
 for letter in set("apple"):
     print(letter)
@@ -444,7 +443,6 @@ class 'tuple'<br/>
 </details>
 
 #### Example 3
-
 ```python
 my_tuple = ('p','e','r','m','i','t')
 print(my_tuple[0])
@@ -515,6 +513,7 @@ del my_tuple
 ('Repeat', 'Repeat', 'Repeat')<br/>
 </details>
 
+#### Example 6
 ```python
 my_tuple = ('a', 'p', 'p', 'l', 'e',)
 print(my_tuple.count('p'))
@@ -529,6 +528,7 @@ print('g' not in my_tuple)
 for name in ('John', 'Kate'):
     print("Hello", name)
 ```
+
 <details>
 <summary>Answer</summary>
 2<br/>
