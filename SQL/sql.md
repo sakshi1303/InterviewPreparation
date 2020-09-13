@@ -306,7 +306,8 @@ order by 1 ;
 ```
 </details>  
 
-## Create all combinations of teams from one table.
+## Create all combinations of teams from one table
+
 ```sql
 create table teams(
 team varchar2(10)
@@ -326,3 +327,93 @@ select t1.team, t2.team from teams t1 cross join teams t2 where t1.team < t2.tea
 ```
 
 </details>
+
+## Frequently brought products in a table
+```sql
+create table order_line
+(
+order_id number ,
+order_line_id number,
+product varchar2(1)
+);
+
+insert into order_line values(1, 1, 'A');
+insert into order_line values(1, 2, 'B');
+insert into order_line values(1, 3, 'C');
+insert into order_line values(1, 4, 'D');
+
+insert into order_line values(2, 1, 'B');
+insert into order_line values(2, 2, 'C');
+
+insert into order_line values(3, 1, 'D');
+insert into order_line values(3, 2, 'A');
+
+insert into order_line values(4, 1, 'B');
+insert into order_line values(4, 2, 'A');
+
+insert into order_line values(5, 1, 'C');
+insert into order_line values(5, 2, 'A');
+
+insert into order_line values(6, 1, 'C');
+insert into order_line values(6, 2, 'A');
+insert into order_line values(6, 3, 'B');
+
+insert into order_line values(7, 1, 'A');
+insert into order_line values(7, 2, 'C');
+insert into order_line values(7, 3, 'D');
+```
+
+<details>
+<summary>Answer</summary>
+  
+```sql
+select o1.product, o2.product , count(*)
+from order_line o1 join order_line o2
+on o1.order_id = o2.order_id
+and o1.product <> o2.product
+where o1.product < o2.product
+group by o1.product, o2.product
+order by 3 desc;
+```
+
+</details>  
+
+
+## Calculate how many batsman have scored more than 15% runs as compared to last year
+```sql
+create table ipl_score
+(batsman_id number , match_id number, score number, year_date number);
+
+insert all
+into ipl_score values (1,1,10,2018)
+into ipl_score values (1,2,15,2018)
+into ipl_score values (1,3,100,2018)
+into ipl_score values (2,1,101,2018)
+into ipl_score values (2,2,115,2018)
+into ipl_score values (2,3,90,2018)
+into ipl_score values (1,1,45,2019)
+into ipl_score values (1,2,155,2019)
+into ipl_score values (1,3,60,2019)
+into ipl_score values (2,1,10,2019)
+into ipl_score values (2,2,20,2019)
+into ipl_score values (2,3,100,2019)
+select 1 from dual;
+```
+<details>
+<summary>Answer</summary>
+  
+```sql
+select 
+batsmen_id,
+year
+from(
+select 
+batsmen_id, 
+year, 
+(lag(sum_run) over(partition by batsmen_id, year) - sum_run)/sum_run *100 inc_pct
+(
+select sum(runs) sum_run , batsmen_id, year  from runs 
+group by batsmen_id, year )) where inc_pct > 15;
+```
+
+</details>  
