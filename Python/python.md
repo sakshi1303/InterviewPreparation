@@ -219,7 +219,68 @@ I like mango<br/>
 
 ## Set
 
+#### Example 1
+
 ```python
+my_set = {1,2,3}
+print(my_set)
+
+my_set = {1.0,'Hello',(1,2,3)}
+print(my_set)
+
+my_set = {1,2,3,4,3,2}
+print(my_set)
+
+my_set = set([1,2,3,2])
+print(my_set)
+
+##my_set = {1,2,[3,4]}
+```
+
+<details>
+<summary>Answer</summary>
+{1, 2, 3}<br/>
+{1.0, (1, 2, 3), 'Hello'}<br/>
+{1, 2, 3, 4}<br/>
+{1, 2, 3}<br/>
+</details> 
+
+#### Example 2
+
+```python
+a={}
+print(type(a))
+
+a=set()
+print(type(a))
+
+my_set = {1,3}
+print(my_set)
+
+my_set.add(2)
+print(my_set)
+
+my_set.update([2,3,4])
+print(my_set)
+
+my_set.update([4,5],{1,6,8})
+print(my_set)
+```
+
+<details>
+<summary>Answer</summary>
+<class 'dict'>
+<class 'set'>
+{1, 3}
+{1, 2, 3}
+{1, 2, 3, 4}
+{1, 2, 3, 4, 5, 6, 8}
+</details> 
+
+#### Example 3
+
+```python
+my_set = {1, 3, 4, 5, 6}
 print(my_set)
 
 my_set.discard(4)
@@ -234,17 +295,29 @@ print(my_set)
 ##my_set.remove(2)  --Error
 ##my_set.discard(2)
 
-
 my_set = set("HelloWorld")
 print(my_set)
-
 
 my_set.pop()
 print(my_set)
 
 my_set.clear()
 print(my_set)
+```
 
+<details>
+<summary>Answer</summary>
+{1, 3, 4, 5, 6}<br/>
+{1, 3, 5, 6}<br/>
+{1, 3, 5}<br/>
+{1, 3, 5}<br/>
+{'e', 'l', 'd', 'r', 'W', 'o', 'H'}<br/>
+{'l', 'd', 'r', 'W', 'o', 'H'}<br/>
+set()<br/>
+</details>    
+
+#### Example 4
+```python
 A = {1,2,3,4,5}
 B = {4,5,6,7,8}
 
@@ -254,16 +327,30 @@ print(A.union(B))
 print(A & B)
 print(A.intersection(B))
 
-
 print(A - B)
 print(A.difference(B))
 print(B.difference(A))
 
-
 print(A ^ B)
 print(A.symmetric_difference(B))
 print(B.symmetric_difference(A))
+```
 
+<details>
+<summary>Answer</summary>
+{1, 2, 3, 4, 5, 6, 7, 8}<br/>
+{1, 2, 3, 4, 5, 6, 7, 8}<br/>
+{4, 5}<br/>
+{4, 5}<br/>
+{1, 2, 3}<br/>
+{1, 2, 3}<br/>
+{8, 6, 7}<br/>
+{1, 2, 3, 6, 7, 8}<br/>
+{1, 2, 3, 6, 7, 8}<br/>
+{1, 2, 3, 6, 7, 8}<br/>
+</details>  
+
+```python
 
 my_set = set("apple")
 print('a' in my_set)
@@ -282,8 +369,21 @@ print(A.difference(B))
 print(A | B)
 
 ##print(A.add(3))
-
 ```
+
+<details>
+<summary>Answer</summary>
+True<br/>
+False<br/>
+True<br/>
+e<br/>
+a<br/>
+l<br/>
+p<br/>
+False<br/>
+frozenset({1, 2})<br/>
+frozenset({1, 2, 3, 4, 5, 6})<br/>
+</details>  
 
 ## Tuple
 
