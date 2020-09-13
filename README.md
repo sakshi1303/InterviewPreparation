@@ -4,7 +4,7 @@
 
 [comment]: # (Use :black_square_button: for uncomplete tasks and :white_check_mark: for completed tasks. )
 
-:white_check_mark: [SQL](https://github.com/sakshi1303/InterviewPreparation/tree/master/SQL)
+:white_check_mark: [SQL](https://github.com/sakshi1303/InterviewPreparation/blob/master/SQL/sql.md)
 
 
 :black_square_button: DWH
