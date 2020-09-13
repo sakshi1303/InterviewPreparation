@@ -13,7 +13,7 @@
 :black_square_button: Data Modeling
 
 
-:black_square_button: Python
+:white_check_mark: [Python](https://github.com/sakshi1303/InterviewPreparation/blob/master/Python/python.md)
 
 
 :black_square_button: AWS
