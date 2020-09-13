@@ -142,8 +142,8 @@ insert into price values (2,400,to_Date('06-Jan-2019','DD-MON-YYYY'));
 <summary>Answer</summary>
 
 ```sql
-select min(effective_date) begin_dt , max(effective_Date) end_dt , price , product_id  from(
-select 
+select min(effective_date) begin_dt , max(effective_Date) end_dt , price , product_id  
+from(select 
 sum(case when lag_price <> price then 1 else 0 end) over(partition by product_id order by effective_Date ) rng , product_id , effective_Date, price
 from
 (select lag(price) over(partition by product_id order by effective_Date)  lag_price , price , effective_Date, product_id  from price ))
@@ -234,3 +234,95 @@ select * from user_details where end_dt >= '01-Jan-2020' and start_dt <='31-Jan-
 ```
 
 </details>  
+
+## Worst case and Best case with joins
+
+```sql
+DROP TABLE tb1;
+DROP TABLE tb2;
+CREATE TABLE TB1(
+pk NUMBER);
+
+CREATE TABLE TB2(
+pk NUMBER);
+
+insert into tb1 values(1);
+insert into tb1 values(1);
+insert into tb1 values(1);
+insert into tb1 values(2);
+insert into tb1 values(3);
+
+insert into tb2 values(1);
+insert into tb2 values(1);
+insert into tb2 values(3);
+insert into tb2 values(4);
+
+select * from tb1 inner join tb2 using(pk) ;
+select * from tb1 left outer join tb2 using(pk) ;
+select * from tb1 right outer join tb2 using(pk) ;
+select * from tb1 full outer join tb2 using(pk) ;
+select * from tb1 cross join tb2 ;
+```
+
+<details>
+<summary>Answer</summary>
+
+7, 8, 8, 9, 20
+
+</details>  
+
+## Three consecutive seats availability in theatres
+```sql
+create table seats(
+seat_id NUMBER GENERATED ALWAYS AS IDENTITY,
+AVAILABILITY VARCHAR2(1)
+);
+
+insert into seats(availability) values('Y');
+insert into seats(availability) values('Y');
+insert into seats(availability) values('N');
+insert into seats(availability) values('Y');
+insert into seats(availability) values('N');
+insert into seats(availability) values('N');
+insert into seats(availability) values('Y');
+insert into seats(availability) values('Y');
+insert into seats(availability) values('Y');
+insert into seats(availability) values('Y');
+insert into seats(availability) values('N');
+insert into seats(availability) values('N');
+insert into seats(availability) values('Y');
+insert into seats(availability) values('Y');
+insert into seats(availability) values('Y');
+insert into seats(availability) values('N');
+```
+
+<details>
+<summary>Answer</summary>
+  
+```sql
+select * from seats s1 where  s1.availability ='Y' 
+and 'Y'= ALL(select s2.availability from seats s2 where s2.seat_id between s1.seat_id and s1.seat_id + 2 ) 
+order by 1 ;
+```
+</details>  
+
+## Create all combinations of teams from one table.
+```sql
+create table teams(
+team varchar2(10)
+);
+
+insert into teams values('IND');
+insert into teams values('SA');
+insert into teams values('ENG');
+insert into teams values('AUS');
+```
+
+<details>
+<summary>Answer</summary>
+
+```sql  
+select t1.team, t2.team from teams t1 cross join teams t2 where t1.team < t2.team ;
+```
+
+</details>
