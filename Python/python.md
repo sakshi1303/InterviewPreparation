@@ -542,6 +542,7 @@ Hello Kate<br/>
 
 ## Dictionary
 
+#### Example 1
 ```python
 my_dict = {}
 print(my_dict)
@@ -549,10 +550,8 @@ print(my_dict)
 my_dict = {1: 'apple', 2: 'ball'};
 print(my_dict)
 
-
 my_dict = {'name': 'John', 1:[2,4,3]}
 print(my_dict)
-
 
 my_dict = dict({1:'apple', 2:'ball'})
 print(my_dict)
@@ -567,15 +566,30 @@ print(my_dict.get('age'))
 print(my_dict.get('address'))
 ##print(my_dict['address'])
 
-
 my_dict = {'name': 'Jack', 'age': 26}
 my_dict['age'] = 27
 print(my_dict)
 
 my_dict['address'] = 'Downtown'
 print(my_dict)
+```
 
+<details>
+<summary>Answer</summary>
+{}<br/>
+{1: 'apple', 2: 'ball'}<br/>
+{'name': 'John', 1: [2, 4, 3]}<br/>
+{1: 'apple', 2: 'ball'}<br/>
+{1: 'apple', 2: 'ball'}<br/>
+Jack<br/>
+26<br/>
+None<br/>
+{'name': 'Jack', 'age': 27}<br/>
+{'name': 'Jack', 'age': 27, 'address': 'Downtown'}<br/>
+</details>
 
+#### Example 2
+```python
 squares = {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
 print(squares.pop(4))
 print(squares)
@@ -588,7 +602,19 @@ print(squares)
 
 del squares
 ##print(squares)
+```
 
+<details>
+<summary>Answer</summary>
+16<br/>
+{1: 1, 2: 4, 3: 9, 5: 25}<br/>
+(5, 25)<br/>
+{1: 1, 2: 4, 3: 9}<br/>
+{}<br/>
+</details>
+
+#### Example 3
+```python
 marks = {}.fromkeys(['Math','English','Science'],0)
 print(marks)
 
@@ -596,8 +622,19 @@ for item in marks.items():
     print(item)
 
 print(list(sorted(marks.keys())))
+```
 
+<details>
+<summary>Answer</summary>
+{'Math': 0, 'English': 0, 'Science': 0}<br/>
+('Math', 0)<br/>
+('English', 0)<br/>
+('Science', 0)<br/>
+['English', 'Math', 'Science']<br/>
+</details>
 
+#### Example 4
+```python
 squares = {x : x*x for x in range(6)}
 print(squares)
 
@@ -612,19 +649,45 @@ print(odd_squares)
 squares = {1: 1, 3: 9, 5: 25, 7: 49, 9: 81}
 print(1 in squares)
 print(2 not in squares)
-print(49in squares)
+print(49 in squares)
+```
 
+<details>
+<summary>Answer</summary>
+{0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25}<br/>
+{0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25}<br/>
+{1: 1, 3: 9, 5: 25, 7: 49, 9: 81}<br/>
+True<br/>
+True<br/>
+False<br/>
+</details>
+
+#### Example 5
+```python
 squares = {1: 1, 3: 9, 5: 25, 7: 49, 9: 81}
 for i in squares:
     print(squares[i])
-
+    
 squares = {0: 0, 1: 1, 3: 9, 5: 25, 7: 49, 9: 81}
 print(all(squares))
 print(any(squares))
 print(len(squares))
 print(sorted(squares))
-
 ```
+
+<details>
+<summary>Answer</summary>
+1<br/>
+9<br/>
+25<br/>
+49<br/>
+81<br/>
+False<br/>
+True<br/>
+6<br/>
+[0, 1, 3, 5, 7, 9]<br/>
+</details>
+
 
 ## For & While Loop
 
