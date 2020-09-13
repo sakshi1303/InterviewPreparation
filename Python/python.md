@@ -1106,7 +1106,9 @@ Enter the key:<br/>
 Key not found<br/>
 </details>
 
-## Find all files in a directory with last name as .pyc (in python and UNIX)
+## Searching a file in filesystem
+
+#### Find all files in a directory with last name as .pyc (in python and UNIX)
 
 <details>
 <summary>Answer</summary>
@@ -1123,7 +1125,9 @@ find . -name "*.pyc"
 ```
 </details>
 
-## Find minimum number of changes in a string to convert it into Palindrome
+## Palindrome
+
+#### Find minimum number of changes in a string to convert it into Palindrome
 
 <details>
 <summary>Answer</summary>
