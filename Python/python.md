@@ -600,6 +600,7 @@ dict = {'First Score':[100,90,np.nan,95],
         }
 df = pd.DataFrame(dict)
 df.fillna(0)
+print(df)
 df.dropna()
 print(df)
 ```
