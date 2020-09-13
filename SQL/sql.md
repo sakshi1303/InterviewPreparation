@@ -769,11 +769,7 @@ on e1.empno=e2.emp;
 | Seller_id  | Start_Date | end_Date | Seller_name |
 Order_id | Order_day | Seller_id | Price|Quantity
 
-<details>
-<summary>Answer</summary>
-
 ```sql
-
 create table seller
 (seller_id number,
 seller_name varchar2(20),
@@ -788,7 +784,6 @@ seller_id number,
 price number,
 quantity number);
 
-
 insert into seller values(1,'Paul','01-APR-2020',null);
 insert into seller values(2,'John','01-JAN-2020','31-MAR-2020');
 insert into seller values(3,'Mic','01-FEB-2020',null);
@@ -801,7 +796,12 @@ insert into orders values(4,'20-APR-2020',2,75,2);
 insert into orders values(5,'30-MAR-2020',3,300,2);
 insert into orders values(6,'20-APR-2020',4,10,5);
 insert into orders values(7,'20-FEB-2020',3,500,1);
+```
 
+<details>
+<summary>Answer</summary>
+
+```sql
 select 
 s.seller_id , sum(price*quantity) 
 from 
@@ -810,80 +810,11 @@ left outer join
 order o
 on s.seller_id=o.seller_id and o.order_day between s.start_Date and NVL(s.end_Date,'31-DEC-9999')
 group by s.seller_id ;
-
 ```
 
 </details>
 
-## Complex Problem 
-
-Situation
-
-1. Migrate legacy data warehouse to new data warehouse/data model of approx. 10 TB containing data from 2007 till present.
-2. Legacy datawarehouse had normalization and poor data model which created problem in developing and maintaining reports. 
-3. Migrating for 3 months in lower environments took 2 days , extrapolating gives (12/3)*(2019-2007)*2 = 96 days
-
-Task
-
-1. Reduce time for migration. 
-2. Keep CPU , RAM in check.
-
-Action
-
-1. Create partitions of 7 days.
-2. Use Python Multi-threading to process 7 days chunk in one thread. 
-3. Maintain 4-6 threads at a time to keep CPU , RAM in check. 
-4. Use CTAS in place of conventional INSERT.
-
-Result
-
-3 months data took only 5 mins ultimately on prod day it got completed in 240 mins or 6 hours hence saving almost 90 days of effort and consumption. 
-
-## How Uber can enhance their app?
-
-1. Option to chat within the app with Customer support .
-2. Ability to select your driver.
-3. Analysis of Review via graph
-4. System through which destination of customer is shared with driver.
-
-## Uber system design 
-
-1. Supply and demand service
-
-2. Every car sends lat and long after every 5 secs.
-
-3. DISPATCH Optimization
-  a) Uber uses Google S2 which divides earth into small cells with unique cell id.
-  b) S2 can give a coverage of a shape for example a circle of radius 1 km etc.
-  c) Cell id is used as a sharding key to find data more quickly. 
-  d) As per sharding key, Uber calculates distance by road system and sort it for better supply.
-
-4. Scaling of dispatch system is done via Node.js with ringpop.
-
-5. Apache Kafka's API's are used to send geo data to datacentre.
-
-6. Historical time is used to calculate ETA's. 
-
-7. Use either AI or Djisktra Algorithm to calculate ETA's.
-
-8. Intersections are nodes and roads are edges.
-
-9. Djisktra's algorithm is impractical for millions of nodes so use Contraction hierarchies where shortcuts , highways and other inputs can be given for pre-processing. Roads changes rarely so this pre-processing even if it takes hours can be afforded. 
-
-10. Logging is done again via Kafka.
-
-## Netflix system design 
-
-1. Other than serving video everything is handled by AWS. 
-
-2. Serving video is done by Open Connect ( A custom Content delivery Network).
-
-3. Files are transcoded for different speed and devices.
-
-4. Movie recommendations logging and all other things are done in AWS.
-
-## Movie Reviewer Data Model
-
+## Movie Reviewer Query on DWH
 ```sql
 create table movie 
 (
@@ -936,16 +867,14 @@ insert into rating values(14,1,4,to_date('20180301','YYYYMMDD'),4);
 insert into rating values(15,5,1,to_date('20180401','YYYYMMDD'),3.8);
 insert into rating values(16,2,5,to_date('20180501','YYYYMMDD'),3.9);
 insert into rating values(17,3,6,to_date('20180601','YYYYMMDD'),4.5);
-
 ```
 
-### Those who reviewed movie better than first time.(with and without analytical functions)
+#### Those who reviewed movie better than first time(with and without analytical functions)
 
 <details>
 <summary>Answer</summary>
 
 ```sql
-
 select re.reviewer_name from (
 select 
 reviewer_id , 
@@ -990,7 +919,7 @@ order by 1,2,3
 ```
 </details>
 
-### Create a report with reviewername|2017|2018|2019
+#### Create a report with reviewername|2017|2018|2019
 
 <details>
 <summary>Answer</summary>
@@ -1032,11 +961,27 @@ left outer join
 rating ra
 on r.reviewer_id=ra.reviewer_id
 where rating_date is null;
-
 ```
+
 </details>
 
 ## Print dept and emp with max salary(analytical fns , group by IN clause, joins)
+```sql
+create table emp
+(empid number,
+deptid number,
+salary number
+);
+
+insert into emp values(1, 1, 100000);
+insert into emp values(2, 1, 200000);
+insert into emp values(3, 1, 300000);
+insert into emp values(4, 2, 500000);
+insert into emp values(5, 3, 400000);
+insert into emp values(6, 3, 100000);
+insert into emp values(7, 4, 800000);
+insert into emp values(8, 5, 200000);
+```
 
 <details>
 <summary>Answer</summary>
@@ -1053,21 +998,6 @@ from
 scott.emp 
 group by deptno ) e2 
 on e1.sal=e2.max_sal and e1.deptno=e2.deptno;
-
-create table emp
-(empid number,
-deptid number,
-salary number
-);
-
-insert into emp values(1, 1, 100000);
-insert into emp values(2, 1, 200000);
-insert into emp values(3, 1, 300000);
-insert into emp values(4, 2, 500000);
-insert into emp values(5, 3, 400000);
-insert into emp values(6, 3, 100000);
-insert into emp values(7, 4, 800000);
-insert into emp values(8, 5, 200000);
 
 select * from emp
 where (deptid, salary) in (
@@ -1093,7 +1023,7 @@ from emp e
 ```
 </details>
 
-## Find batsman who scored 3 consecutive dots. 
+## Find batsman who scored 3 consecutive dots
 
 Innid|Overid|Ball_num|Batsman|Bowler|Runs_scored|Is_wide|Is_noball|Is_freehit
 
@@ -1154,70 +1084,13 @@ select * from tb1 cross join tb2 ;
   
 </details>  
 
-## Find minimum number of changes in a string to convert it into Pallindrome.
-
-<details>
-<summary>Answer</summary>
-
-```python
-
-In [36]: def pallindrome(string): 
-    ...:     cnt_steps=0 
-    ...:     for i in range(len(string)//2): 
-    ...:         if string[i] != string[(i+1)*-1]: 
-    ...:             cnt_steps=cnt_steps + 1 
-    ...:     return cnt_steps 
-    ...:      
-    ...:   
-
-```
-</details>
-
-## Find files which has been updated in last hour.
-
-<details>
-  <summary>Answer</summary>
-
-```bash
-
-find . -mtime -1
-
-```
-
-</details>
-
-## Find all files in a directory with last name as .pyc (in python and UNIX)
-
-<details>
-  <summary>Answer</summary>
-  
-```python
- import os
- for path, dirs, files in os.walk('.'):
-     for file in files :
-         if file.endswith('.pyc'):
-             print(file)
-
-```
-
-```bash
-
-find . -name "*.pyc"
-
-```
-</details>
-
 ## Ticket table , Audit Table Id
 TID|Impact|CreateTime|
 AID|TID|CreateTime|Team
 
-Tickets count Group per week basis on Team, Impact
+#### Tickets count Group per week basis on Team, Impact
 
-<details>
-<summary>Answer</summary>
-  
 ```sql
-
 create table ticket
 (
 tid number,
@@ -1248,7 +1121,12 @@ insert into audits values (5, 3, '28-MAR-2020', 'A');
 insert into audits values (6, 4, '28-MAR-2020', 'C');
 insert into audits values (7, 4, '21-MAR-2020', 'A');
 insert into audits values (8, 5, '11-MAR-2020', 'B');
+```
 
+<details>
+<summary>Answer</summary>
+  
+```sql
 select
 to_week(createtime) , team,impact,count(*)
 from(
@@ -1264,56 +1142,11 @@ group by to_week(createtime) , team,impact
 select t.createtime, a.team, t.impact, count(*)
 from ticket t join audits a on t.tid = a.tid
 group by a.team, t.impact, t.createtime;
-
 ```
 
 </details>
 
-## Backfill data like files missing on 12th process date after 10 days.   
-
-<details>
-  <summary>Answer</summary>
-  
-1. Insert those records which are received only on 12th process date
-2. Update those records for which latest was received on 12th only.
-
-</details>
-
-
-## Explain when you disagree with someone.
-
-<details>
-  <summary>Answer</summary>
-  
-  1. Disagreed regarding tuning for performance issues. 
-  2. Created a demo and a technical documentation.
-  3. Gave a 5 min presentation with clear benefits quantitatively. 
-  4. Approached senior management as well with clear and crisp problem statement and solution. 
-  
-  </details>
-
-## Explain when you helped someone. 
-
-<details><summary>Answer</summary>
-  
-  1. Testers needed to reconcile data between two databases. 
-  2. Created utility extracting difference between two datasets.
-  3. Using multithreading to speed up its performance. 
-  
-  </details>
-  
-## How to motivate someone who is not motivated ?
-
-<details><summary>Answer</summary>
-
-1. Informal catchup with the guy everyday for 2-3 weeks asking about skills he is interested in and his opinion of projects.
-2. Made sure to bring to everyone's notice how good of a work he is doing. 
-3. Asked what technology he is most interested in and then arranged for his inclusion even if it meant putting in some extra hours. 
-
-</details>  
-
-## Select all customer id and its latest version.
-
+## Select all customer id and its latest version
 ```sql
 create table customer_hist(
 customer_id number,
@@ -1344,7 +1177,7 @@ where rn =1 order by 1;
 ```
 </details>
 
-## Difference in salary with current employee and minimum salary greater than his/her.
+## Difference in salary with current employee and minimum salary greater than his/her
 
 <details>
 <summary>Answer</summary>
@@ -1355,7 +1188,7 @@ select employeeid , salary, lead(salary) over(order by salary) - salary as diff_
 
 </details>
 
-## Printing all combinations with employees.
+## Printing all combinations with employees
 
 <details>
   <summary>Answer</summary>
@@ -1367,33 +1200,11 @@ select empno , null as mgr , to_char(empno) path from scott.emp where mgr is nul
 union all
 select e.empno , e.mgr , r.path || ',' || e.empno path from rec_table r join scott.emp e on e.mgr=r.empno )
 select * from rec_table ;
-
 ```
 </details>
 
 ## Find all products sold in november 2018
-
-<details>
-  <summary>Answer</summary>
-
 ```sql
-select 
-p.product_name
-from
-(select 
-distinct ol.product_id  
-from orders o
-left outer join 
-order_line on o.order_id=ol.order_id
-left outer join date d on d.day=o.order_day
-where d.month='November' and d.year=2018
-) tbl
-inner join products p 
-on p.product_id=tbl.product_id
-```
-
-```sql
-
 create table orders(
 order_id number,
 customer_id number,
@@ -1475,39 +1286,40 @@ insert into product values (110,'coke');
 insert into product values (111,'pepsi');
 insert into product values (201,'orange');
 insert into product values (311,'oil');
-
-select distinct ol.product_id, p.pname
-from orders o join order_line ol on o.order_id = ol.order_id
-join date_dim dd on dd.eff_dt = o.order_date and dd.eff_year = 2018 
-join product p on ol.product_id = p.pid
-
 ```
-
-</details>
-
-## Sales rep who sold most amount of products as per amount 
 
 <details>
   <summary>Answer</summary>
 
 ```sql
 select 
-r.repr_name , sum(ol.amt)
+p.product_name
 from
-orders o 
-left join 
-order_line ol
-on o.order_id=ol.order_id
-left join 
-representative r 
-on r.repr_id=o.repr_id 
-group by r.repr_name 
+(select 
+distinct ol.product_id  
+from orders o
+left outer join 
+order_line on o.order_id=ol.order_id
+left outer join date d on d.day=o.order_day
+where d.month='November' and d.year=2018
+) tbl
+inner join products p 
+on p.product_id=tbl.product_id
 
+select distinct ol.product_id, p.pname
+from orders o join order_line ol on o.order_id = ol.order_id
+join date_dim dd on dd.eff_dt = o.order_date and dd.eff_year = 2018 
+join product p on ol.product_id = p.pid
+```
+
+</details>
+
+## Sales rep who sold most amount of products as per amount 
+```sql
 create table sales
 (salesid number,
 name varchar2(50)
 );
-
 
 create table orders
 ( orderid number,
@@ -1527,6 +1339,23 @@ insert into orders values (3, 1, 201, 700);
 insert into orders values (4, 2, 107, 400);
 insert into orders values (5, 3, 105, 300);
 insert into orders values (6, 4, 101, 350);
+```
+
+<details>
+<summary>Answer</summary>
+
+```sql
+select 
+r.repr_name , sum(ol.amt)
+from
+orders o 
+left join 
+order_line ol
+on o.order_id=ol.order_id
+left join 
+representative r 
+on r.repr_id=o.repr_id 
+group by r.repr_name 
 
 with temp as(
 select s.salesid, sum(amount) amt
@@ -1534,12 +1363,10 @@ from sales s join orders o on s.salesid = o.salesid
 group by s.salesid
 )select s.*, temp.amt from temp join sales s on s.salesid = temp.salesid
 where amt = (select max(amt) from temp)
-
 ```
 </details>
 
 ## Each student with maximum marks and students
-
 ```sql
 CREATE TABLE STUDENTS
 (
@@ -1554,15 +1381,13 @@ insert into students values(1,'MATHS',92);
 insert into students values(11,'ENG',97);
 insert into students values(11,'HIN',93);
 insert into students values(11,'MATHS',92);
-
 ```
 
 <details>
-  <summary>Answer</summary>
+<summary>Answer</summary>
   
-  ```sql
-  
-  select * from students where (student_id,marks) IN (
+```sql
+select * from students where (student_id,marks) IN (
 select student_id , max(marks) from students group by student_id );
 
 select s1.* from students s1 inner join  (
@@ -1575,8 +1400,8 @@ s1.student_id, s1.marks,s1.subject , dense_rank() over(partition by  student_id 
 from 
 students s1) t
 where rn=1;
-  
-  ```
+```
+
 </details>
 
 ## Running sum of customer data
@@ -1596,343 +1421,24 @@ insert into customers values (1,4,150);
 insert into customers values (2,5,100);
 insert into customers values (2,12,200);
 insert into customers values (2,7,200);
-
 ```
 
 <details>
-  <summary>Answer</summary>
-  
-  ```sql
-  
-  select 
-c.*,
+<summary>Answer</summary>
+
+```sql
+select c.*,
 sum(amount) over(partition by customer_id order by month_id) running_sum
-from customers c
+from customers c 
   
-  ```  
-  
-  ```sql
-  select c2.customer_id, c2.month_id, sum(c1.amount)
+select c2.customer_id, c2.month_id, sum(c1.amount)
 from customers c1 join customers c2
 on c1.customer_id = c2.customer_id
 and c1.month_id <= c2.month_id
 group by c2.customer_id, c2.month_id
 order by c2.customer_id, c2.month_id
 ```
-  
-</details>
 
-## Knapsack Problem
-
-```sql
-create table items 
-(
-id number , 
-item_weight number , 
-item_profit number 
-);
-
-insert into items values (1, 3, 10);
-insert into items values (2, 4, 20);
-insert into items values (3, 5, 30);
-insert into items values (4,6 , 40);
-
-```
-
-<details>
-<summary>Answer</summary>
-
-```sql  
-WITH rsf (nxt_id, lev, tot_weight, tot_profit, path) AS (
-SELECT id nxt_id, 0 lev, item_weight tot_weight, item_profit tot_profit, To_Char (id) path
-  FROM items
- UNION ALL
-SELECT n.id, 
-       r.lev + 1, 
-       r.tot_weight + n.item_weight,
-       r.tot_profit + n.item_profit,
-       r.path || ',' || To_Char (n.id)
-  FROM rsf r
-  JOIN items n
-    ON n.id > r.nxt_id
-   AND r.tot_weight + n.item_weight <= 9
-) SEARCH DEPTH FIRST BY nxt_id SET line_no 
-SELECT LPad (To_Char(nxt_id), lev + 1, '*') node,tot_weight, tot_profit,
-       CASE WHEN lev >= Lead (lev, 1, lev) OVER (ORDER BY line_no) THEN 'Y' END is_leaf,
-       path
-  FROM rsf
- ORDER BY line_no
- 
-``` 
-</details> 
-  
-  
-## DWH - SCD1
-
-```sql
-CREATE TABLE customers (
-  customer_id      NUMBER        GENERATED ALWAYS AS IDENTITY,
-  customer_name   VARCHAR2(255) NOT NULL,
-  customer_address VARCHAR2(255) ,
-  customer_phone_no NUMBER
-);
-
-insert into customers
-(customer_name,customer_address,customer_phone_no)
-values
-('Aditya','Mapsko',1);
-
-insert into customers
-(customer_name,customer_address,customer_phone_no)
-values
-('Sakshi','Sector-17',2);
-
-CREATE TABLE cust_stg (
-  customer_name   VARCHAR2(255) NOT NULL,
-  customer_address VARCHAR2(255) ,
-  customer_phone_no NUMBER
-);
-
-insert into cust_stg
-(customer_name,customer_address,customer_phone_no)
-values
-('Sakshi','Mapsko',3);
-
-insert into cust_stg
-(customer_name,customer_address,customer_phone_no)
-values
-('Lucky','Mapsko',5);
-```
-
-<details>
-  <summary>Answer</summary>
-  
-```sql
-merge into customers c1
-using cust_stg stg
-on (c1.customer_name = stg.customer_name)
-when matched then 
-update set c1.customer_address = stg.customer_address,
-           c1.customer_phone_no = stg.customer_phone_no
-when not matched then
-insert (customer_name, customer_address, customer_phone_no) 
-values (stg.customer_name, stg.customer_address, stg.customer_phone_no);
-```
-
-```sql
-
-create unique index cust_stg_uq on cust_stg(customer_name);
-
-update 
-  (select c1.customer_address AS new_customer_address, c1.
-  AS new_customer_phone_no, 
-          stg.customer_address AS old_customer_address, stg.customer_phone_no AS old_customer_phone_no
-   from customers c1 join cust_stg stg on c1.customer_name = stg.customer_name) cust
-set cust.new_customer_address = cust.old_customer_address,
-    cust.new_customer_phone_no = cust.old_customer_phone_no;
-    
-insert into customers(customer_name,customer_address, customer_phone_no)
-(select stg.customer_name, stg.customer_address, stg.customer_phone_no
-from cust_stg stg left outer join customers c1 
-on  stg.customer_name  = c1.customer_name
-where c1.customer_name is  null)
-```
-
-</details> 
-
-## DWH - SCD2
-
-```sql
-CREATE TABLE customers (
-  customer_id      NUMBER        GENERATED ALWAYS AS IDENTITY,
-  customer_name   VARCHAR2(255) NOT NULL,
-  customer_address VARCHAR2(255) ,
-  customer_phone_no NUMBER,
-  effective_Date date ,
-  expiration_date date
-);
-
-insert into customers
-(customer_name,customer_address,customer_phone_no,effective_Date,expiration_date)
-values
-('Aditya','Mapsko',1,to_Date('20190101','YYYYMMDD'),to_date('99991231','YYYYMMDD'));
-
-insert into customers
-(customer_name,customer_address,customer_phone_no,effective_Date,expiration_date)
-values
-('Sakshi','Sector-17',2,to_Date('20180101','YYYYMMDD'),to_date('99991231','YYYYMMDD'));
-
-CREATE TABLE cust_stg (
-  customer_name   VARCHAR2(255) NOT NULL,
-  customer_address VARCHAR2(255) ,
-  customer_phone_no NUMBER,
-  update_date DATE
-);
-
-insert into cust_stg
-(customer_name,customer_address,customer_phone_no,update_Date)
-values
-('Sakshi','Mapsko',3,to_Date('20190201','YYYYMMDD'));
-
-insert into cust_stg
-(customer_name,customer_address,customer_phone_no,update_Date)
-values
-('Lucky','Mapsko',5,to_Date('20200101','YYYYMMDD'));
-
-```
-<details>
-  <summary>Answer</summary>
-  
-```sql
-
-create unique index cust_stg_uq on cust_stg(customer_name);
-
-insert into customers(customer_name, customer_address, customer_phone_no, effective_date, expiration_date)
-select stg.customer_name, stg.customer_address, stg.customer_phone_no, stg.update_date, '31-DEC-99'
-from cust_stg stg left outer join customers cust on stg.customer_name = cust.customer_name;
-
-update 
-(select cust.effective_date AS old_effective_date, cust.expiration_date AS old_expiration_date,
-        stg.update_date AS new_effective_date
-from customers cust join cust_stg stg on cust.customer_name = stg.customer_name 
-and  cust.effective_date <> stg.update_date                       
-) s1
-set s1.old_expiration_date = s1.new_effective_date;
-
-merge into customers cust
-using (select c1.customer_name, c1.customer_address, c1.customer_phone_no, 
-         c1.effective_date AS effective_date, cs.update_date
-       from customers c1 join cust_stg cs on c1.customer_name = cs.customer_name
-       union all
-       select customer_name, customer_address, customer_phone_no, 
-       update_date AS effective_date, update_date from cust_stg) stg
-on (cust.customer_name = stg.customer_name and cust.effective_date = stg.effective_date)
-when matched then update
-set cust.expiration_date = stg.update_date
-when not matched then 
-insert(customer_name, customer_address, customer_phone_no, effective_date, expiration_date) 
-values(stg.customer_name, stg.customer_address, stg.customer_phone_no, stg.update_date, '31-DEC-9999');
-
-```
-
-</details>
-
-## DWH - FACT Load
-
-```sql
-
-create table fund(
-fund_id number,
-fund_name varchar(50),
-ph_fund_id number
-);
-
-create table security_master(
-security_id number,
-security_type varchar(20),
-effective_date date,
-expiration_date date,
-mdm_security_id number
-);
-
-create table date_dim(
-date_dim_id number,
-effective_date date,
-week_num number,
-month_num number,
-year_num number
-);
-
-
-create table holding_stg(
-ph_fund_id number,
-mdm_security_id number,
-effective_date date,
-traded_value number,
-market_value number,
-process_date date
-);
-
-create table holding(
-fund_id number,
-ph_fund_id number,
-security_id number,
-mdm_security_id number,
-effective_date date,
-traded_value number,
-market_value number,
-process_date date
-);
-
-
-insert into fund values(1, 'Fidelity Fund', 11);
-insert into fund values(2, 'TCS Fund A', 22);
-insert into fund values(3, 'YES Bank Fund', 33);
-insert into fund values(4, 'HDFC Fund', 44);
-insert into fund values(5, 'ICICI Fund', 55);
-
-
-insert into security_master values(1000, 'Cash', to_date('10-JAN-2020','DD-MON-YYYY'), to_date('31-DEC-9999','DD-MON-YYYY'), 10110);
-insert into security_master values(1001, 'Equity', to_date('10-JAN-2020','DD-MON-YYYY'), to_date('10-APR-2020','DD-MON-YYYY'), 10111);
-insert into security_master values(1002, 'Bond', to_date('01-APR-2020','DD-MON-YYYY'), to_date('31-DEC-9999','DD-MON-YYYY'), 10112);
-insert into security_master values(1003, 'MultiAsset', to_date('01-JAN-2020','DD-MON-YYYY'), to_date('31-DEC-9999','DD-MON-YYYY'), 10113);
-insert into security_master values(1004, 'Gold', to_date('20-FEB-2020','DD-MON-YYYY'), to_date('20-MAR-2020','DD-MON-YYYY'), 10114);
-insert into security_master values(1005, 'Equity', to_date('11-APR-2020','DD-MON-YYYY'), to_date('31-DEC-9999','DD-MON-YYYY'), 10111);
-insert into security_master values(1006, 'Gold', to_date('21-MAR-2020','DD-MON-YYYY'), to_date('31-DEC-9999','DD-MON-YYYY'), 10114);
-
-
-insert into date_dim values(20200101, to_date('01-JAN-2020','DD-MON-YYYY'), 1, 1, 2020);
-insert into date_dim values(20200110, to_date('10-JAN-2020','DD-MON-YYYY'), 2, 1, 2020);
-insert into date_dim values(20200220, to_date('20-FEB-2020','DD-MON-YYYY'), 8, 2, 2020);
-insert into date_dim values(20200320, to_date('20-MAR-2020','DD-MON-YYYY'), 12, 3, 2020);
-insert into date_dim values(20200401, to_date('01-APR-2020','DD-MON-YYYY'), 14, 4, 2020);
-insert into date_dim values(20200410, to_date('10-APR-2020','DD-MON-YYYY'), 15, 4, 2020);
-
-
-insert into holding_stg values(11, 10110, to_date('10-JAN-2020','DD-MON-YYYY'),1000, 1500, to_date('11-JAN-2020','DD-MON-YYYY'));  
-insert into holding_stg values(22, 10111, to_date('01-APR-2020','DD-MON-YYYY'),2000, 2500, to_date('02-APR-2020','DD-MON-YYYY'));  
-insert into holding_stg values(33, 10113, to_date('10-JAN-2020','DD-MON-YYYY'),1500, 3000, to_date('11-JAN-2020','DD-MON-YYYY'));  
---insert into holding_stg values(11, 10110, to_date('10-JAN-2020','DD-MON-YYYY'),1000, 1000, to_date('11-JAN-2020','DD-MON-YYYY'));  
---insert into holding_stg values(11, 10110, to_date('10-JAN-2020','DD-MON-YYYY'),1000, 1000, to_date('11-JAN-2020','DD-MON-YYYY'));  
-
-select * from fund;
-select * from security_master ;
-select * from date_dim;
-select * from holding_stg;
-select * from holding;
-
-```
-
-<details>
-  <summary>Answer</summary>
-
-```sql
-
-insert into holding(fund_id, ph_fund_id, security_id, mdm_security_id, effective_date, traded_value, market_value, process_date)
-select f.fund_id, stg.ph_fund_id, sm.security_id, stg.mdm_security_id, stg.effective_date, stg.traded_value, stg.market_value, stg.process_date 
-from holding_stg stg 
-left outer join fund f on stg.ph_fund_id = f.ph_fund_id
-left outer join security_master sm on stg.mdm_security_id = sm.mdm_security_id 
-and stg.effective_date between sm.effective_date and sm.expiration_date;
-
-```
-
-</details>
-
-## DWH - Reporting Query
-
-<details>
-  <summary>Answer</summary>
-
-```sql
-
-select f.fund_name, hld.* 
-from holding hld join fund f on f.fund_id = hld.fund_id
-join security_master sm on sm.security_id = hld.security_id
-join date_dim dd on hld.effective_date = dd.effective_date
-where dd.month_num = 1
-
-```
 </details>
 
 ## SQL Validation and Tuning
@@ -1996,11 +1502,10 @@ INNER JOIN
 REGIONS T3 ON (T1.DISTRICT = T3.DISTRICT)
 GROUP BY 1,2,3,4
 HAVING T1.ORDER_DATE BETWEEN TO_DATE('2020-01-01','YYYY-MM-DD') AND TO_DATE('2020-03-01','YYYY-MM-DD'));
-
 ```
 
 <details>
-  <summary>Answer1</summary>
+<summary>Answer1</summary>
 
 ```sql
 
@@ -2023,7 +1528,7 @@ WHERE O.ORDER_ID IS NULL;
 </details>  
 
 <details>
-  <summary>Answer2</summary>
+<summary>Answer2</summary>
   
 ```sql
 
@@ -2052,7 +1557,7 @@ SHIPMENT_ID    SHIP_DAY
 Consider any master table / datastet and create a view on top- of that if needed.
 
 <details>
-  <summary>Answer</summary>
+<summary>Answer</summary>
 
 ```sql
 
@@ -2089,7 +1594,7 @@ reside on multiple partitions. Now if I query these partitions I will get multip
 Can you suggest me a strategy so that I get only the lastest update of an order after querying the partitions.
 
 <details>
-  <summary>Answer</summary>
+<summary>Answer</summary>
 
 ```sql
 
@@ -2163,7 +1668,6 @@ from orders o
 ) 
 where (o.product_id = 'P001' or o.product_id = 'P002') 
  and (o.product_id = 'P002' or o.product_id = 'P001');
-
 ```
  
 </details>
