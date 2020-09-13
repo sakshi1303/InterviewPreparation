@@ -844,3 +844,63 @@ res = palindrome('00001100')
 print(res)
 ```
 </details>
+
+## Multithreading
+
+#### https://github.com/sakshi1303/Python/blob/master/MultiThreading/MultiThreading.md
+
+```python
+from threading import Thread
+from queue import Queue
+
+## Main Function
+
+p_start_date1 = '01-JAN-2003'
+p_end_date1   = '31-DEC-2003'
+p_start_date2 = '01-JAN-2004'
+p_end_date2   = '31-DEC-2004'
+p_start_date3 = '01-JAN-2005'
+p_end_date3   = '31-DEC-2005'
+p_start_date4 = '01-JAN-2006'
+p_end_date4   = '31-DEC-2006'
+p_start_date5 = '01-JAN-2007'
+p_end_date5   = '31-DEC-2007'
+result_list = [[p_start_date1, p_end_date1], [p_start_date2, p_end_date2],
+               [p_start_date3, p_end_date3], [p_start_date4, p_end_date4],
+               [p_start_date5, p_end_date5]]
+queue = Queue()
+for elem in result_list:
+    queue.put(elem)
+thread_list = []    
+for i in range(3):
+    thread = Consumer(queue)
+    thread_list.append(thread)
+    thread_list[i].start()
+for thread in thread_list:
+    thread.join()
+
+## Consumer Class
+
+class Consumer(Thread) :
+    def __init__(self, queue):
+        Thread.__init__(self)
+        self.queue = queue
+    
+    def run(self):
+        while not self.queue.empty():
+            elem = self.queue.get()
+            p_start_date = str(elem[0])
+            p_end_date   = str(elem[1])
+            print('Start time:' + str(datetime.datetime.now()) + ' ' + p_start_date + ' ' + p_end_date)
+            qry = """ CREATE TABLE TEST_HISTORY_""" + str(p_start_date[-4:0]) + """ AS 
+                      SELECT t.*, RANK() OVER (PARTITION BY TEST_DATE ORDER BY TEST_NAME) AS RN
+                      FROM TEST
+                      WHERE TEST_DATE BETWEEN TO_DATE('{p_start_date}', 'DD-MON-YYYY') AND TO_DATE('{p_end_date}', 'DD-MON-YYYY') 
+                      """.format(p_start_date=p_start_date, p_end_date=p_end_date)
+            conn = cx.connect(username, pwd, host) 
+            cursor = conn.cursor()
+            cursor.execute(qry)
+            print('Start time:' + str(datetime.datetime.now()) + ' ' + p_start_date + ' ' + p_end_date)
+            conn.close()
+            self.queue.task_done()
+```
