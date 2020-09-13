@@ -614,3 +614,199 @@ print(df)
    First Score  Second Score  Third Score  Fourth Score<br/>
 3         95.0          56.0           98          65.0<br/>
 </details>
+
+## Merge Sort
+
+```python
+## Divide and Conquer 
+## First divide the array into smaller subarrays recursively until subarray contains min no of element i.e. 1
+## Now merge the subarrays to form a larger/combined sorted array
+
+## Complexity :
+    ## Time 
+       ## Best  - O(nlogn)
+       ## Avg   - O(nlogn)
+       ## Worst - O(nlogn)
+    ## Space - O(n) 
+
+import math
+def merge_sort(arr,p,r):
+    if p < r:
+        q = (p+r)//2
+        merge_sort(arr,p,q)
+        merge_sort(arr,q+1,r)
+        merge(arr,p,q,r)
+    
+def merge(arr,p,q,r):
+    L = arr[p:q+1]
+    R = arr[q+1:r+1]
+    L.append(math.inf)
+    R.append(math.inf)
+    i,j = 0,0
+    for k in range(p,r+1):
+        if L[i] <= R[j]:
+            arr[k] = L[i]
+            i = i+1
+        else:
+            arr[k] = R[j]
+            j = j+1
+        
+arr = [48, 56, 92, 37, 11]
+merge_sort(arr,0,len(arr)-1)
+print('Sorted Array:', arr)
+```
+<details>
+<summary>Answer</summary>
+Sorted Array: [11, 37, 48, 56, 92]
+</details>
+
+## Heap Sort
+
+```python
+## First Step is to build a Max Heapify using first loop in heapSort function
+## that calls heapify function. 
+
+## Second loop is to sort the Max-Heap build in the first step which includes:
+    ## 1. Swap
+    ## 2. Remove
+    ## 3. Heapify
+    
+## Complexity :
+    ## Time - nlogn
+    ## Space - O(1)    
+
+
+def heapSort(arr):
+    n = len(arr)
+    ## Heapify
+    for i in range(n, -1, -1):
+        heapify(arr, n, i)    
+    ## Now apply Heap Sort    
+    for i in range(n-1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        heapify(arr, i, 0)
+
+##Max Heapify        
+def heapify(arr, n, i) :  
+    largest = i;
+    l = 2*i + 1
+    r = 2*i + 2
+    if l < n and arr[largest] < arr[l]:
+        largest = l
+    if r < n and arr[largest] < arr[r]:
+        largest = r
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, n, largest)
+        
+arr = [42, 76, 81, 39, 16]      
+heapSort(arr) 
+print('Sorted Array:', arr)
+```
+<details>
+<summary>Answer</summary>
+Sorted Array: [16, 39, 42, 76, 81]
+</details>
+
+## Binary Search 
+
+#### Recursive Approach
+
+```python
+## Divide an Conquer to find element at middle position of array
+## First Sort the elements if not sorted 
+## Two ways of implementation 
+  ## 1. Iterative Method
+  ## 2. Recursive Method - We are using this approach that uses divide and conquer algorithm
+  
+## Complexity :
+    ## Time 
+       ## Best  - O(1)
+       ## Avg   - O(logn)
+       ## Worst - O(logn)
+    ## Space - O(n)    
+
+def binary_search(arr,low,high,key):
+    if low <= high:
+        mid = round((low+high)/2)
+        if key == arr[mid]:
+            return mid
+        elif key > arr[mid]:
+            low = mid + 1
+            return binary_search(arr,low,high,key)
+        elif key < arr[mid]:
+            high = mid - 1
+            return binary_search(arr,low,high,key)   
+    else:
+        return -1
+        
+        
+arr = [3,4,5,6,7,8,9]
+print(arr)
+print('Enter the key:')
+key = int(input())
+low = 0
+high = len(arr)-1
+res = binary_search(arr,low,high,key)
+if res != -1:
+    print('Key is found at location:', res) 
+else:
+    print('Key not found')
+```
+
+<details>
+<summary>Answer</summary>
+[3, 4, 5, 6, 7, 8, 9]<br/>
+Enter the key:<br/>
+5<br/>
+Key is found at location: 2<br/>
+</details>
+
+#### Iterative Approach
+
+```python
+## To find element at middle position of array
+## First Sort the elements if not sorted 
+## Two ways of implementation 
+  ## 1. Iterative Method - We are using this approach
+  ## 2. Recursive Method 
+  
+## Complexity :
+    ## Time 
+       ## Best  - O(1)
+       ## Avg   - O(logn)
+       ## Worst - O(logn)
+    ## Space - O(n)    
+
+def binary_search(arr,low,high,key):
+    while low <= high:
+        mid = round((low+high)/2)
+        if key == arr[mid]:
+            return mid
+        elif key > arr[mid]:
+            low = mid + 1
+        elif key < arr[mid]:
+            high = mid - 1
+    else:
+        return -1
+        
+arr = [3,4,5,6,7,8,9]
+print(arr)
+print('Enter the key:')
+key = int(input())
+low = 0
+high = len(arr)-1
+res = binary_search(arr,low,high,key)
+if res != -1:
+    print('Key is found at location:', res) 
+else:
+    print('Key not found')
+```
+
+<details>
+<summary>Answer</summary>
+[3, 4, 5, 6, 7, 8, 9]<br/>
+Enter the key:<br/>
+0<br/>
+Key not found<br/>
+</details>
