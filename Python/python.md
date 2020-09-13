@@ -421,10 +421,10 @@ print(list(range(2,20,3)))
 
 <details>
 <summary>Answer</summary>
-range(0, 10)
-[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-[2, 3, 4, 5, 6, 7]
-[2, 5, 8, 11, 14, 17]
+range(0, 10)<br/>
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]<br/>
+[2, 3, 4, 5, 6, 7]<br/>
+[2, 5, 8, 11, 14, 17]<br/>
 </details>
 
 #### Example 3
@@ -438,9 +438,9 @@ for i in range(len(genre)):
 
 <details>
 <summary>Answer</summary>
-I like pop
-I like rock
-I like jazz
+I like pop<br/>
+I like rock<br/>
+I like jazz<br/>
 </details>
 
 #### Example 4
@@ -492,8 +492,8 @@ else:
 
 <details>
 <summary>Answer</summary>
-Inside Loop
-Inside Loop
-Inside Loop
-Inside else
+Inside Loop<br/>
+Inside Loop<br/>
+Inside Loop<br/>
+Inside else<br/>
 </details>
