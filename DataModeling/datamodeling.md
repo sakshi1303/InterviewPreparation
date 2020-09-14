@@ -65,10 +65,11 @@ For example -
 |333|Physics|40|
 |333|Chemistry|40|
 
-Candidate Keys: {teacher_id, subject}
+Candidate Keys: {teacher_id, subject}<br/>
 Non prime attribute: teacher_age
 
 Here, teacher_age is dependent on teacher_id alone(but not on subject) which is a proper subset of candidate key. Hence this is not in 2NF.
+
 After normalising the table to 2NF -
 
 teacher_details :-
@@ -113,9 +114,16 @@ For example -
 |1101|Lilly|292008|UK|Pauri|Bhagwan|
 |1201|Steve|222999|MP|Gwalior|Ratan|
 
-Super keys: {emp_id}, {emp_id, emp_name}, {emp_id, emp_name, emp_zip}…so on
-Candidate Keys: {emp_id}
+Super keys: {emp_id}, {emp_id, emp_name}, {emp_id, emp_name, emp_zip}…so on<br/>
+Candidate Keys: {emp_id}<br/>
 Non-prime attributes: all attributes except emp_id are non-prime as they are not part of any candidate keys.
+
+emp_id -> emp_zip<br/>
+emp_zip -> emp_state,emp_city,emp_district
+
+This means, emp_state/emp_city/emp_district are transitively dependant on emp_id as - 
+
+emp_id -> emp_zip -> emp_state
 
 Here, emp_state, emp_city & emp_district dependent on emp_zip. And, emp_zip is dependent on emp_id that makes non-prime attributes (emp_state, emp_city & emp_district) transitively dependent on super key (emp_id). This violates the rule of 3NF.
 
@@ -153,8 +161,8 @@ A table is said to be in bcnf/3.5NF if -
 |1002|American|design and technical support|D134|100|
 |1002|American|Purchasing department|D134|600|
 
-Functional dependencies in the table above:
-emp_id -> emp_nationality
+Functional dependencies in the table above:<br/>
+emp_id -> emp_nationality<br/>
 emp_dept -> {dept_type, dept_no_of_emp}
 
 Candidate key: {emp_id, emp_dept}
@@ -185,13 +193,13 @@ emp_dept_mapping table:
 |1002|design and technical support|
 |1002|Purchasing department|
 
-Functional dependencies:
-emp_id -> emp_nationality
+Functional dependencies:<br/>
+emp_id -> emp_nationality<br/>
 emp_dept -> {dept_type, dept_no_of_emp}
 
-Candidate keys:
-For first table: emp_id
-For second table: emp_dept
+Candidate keys:<br/>
+For first table: emp_id<br/>
+For second table: emp_dept<br/>
 For third table: {emp_id, emp_dept}
 
 This is now in BCNF as in both the functional dependencies left side part is a key.
