@@ -10,7 +10,7 @@
 :black_square_button: DWH
 
 
-:black_square_button: Data Modeling
+:white_check_mark:[Data Modeling](https://github.com/sakshi1303/InterviewPreparation/tree/master/DataModeling)
 
 
 :white_check_mark: [Python](https://github.com/sakshi1303/InterviewPreparation/blob/master/Python/python.md)
