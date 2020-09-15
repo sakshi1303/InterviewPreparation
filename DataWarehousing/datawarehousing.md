@@ -54,3 +54,20 @@
 3. Ragged/Variable Depth Hierarchies with Hierarchy Bridge Tables - Add specially designed bridge table which contains record for every possible path/level in ragged hierarchy.
 4. Ragged/Variable Depth Hierarchies with Pathstring Attributes - Do not use bridge table rather add a pathstring attribute which contains complete path description from highest node down to the node described by that particular dimension row.
 
+## Advanced Fact Table Techniques
+
+1. Fact Table surrogate keys can be useful but not mandatory. Sequential and not associated with any dimension.
+2. Centipede Fact Tables result when low cardinal foreign keys are used in fact tables instead of junk dimension. 
+3. If Numeric Values are used for calculation purposes then use in Fact and if they are to be filtered/grouped then use in Dimensions.
+4. Accumulating Facts should store one time lag for each step from starting point so that lag between consecutive steps can be calculated.
+5. All header-level dimension foreign keys and degenerate dimensions should be included in line-level fact table.
+6. Allocated facts can be sliced and rolled up by all dimensions.
+7. Profit and Loss Fact Tables Using Allocations at atomic transaction grain.
+8. Multiple Currency Facts to be maintained for transactions occuring at true currency and in standard currency.
+9. Store the standard measure and conversion factor in single fact table in case of Multiple Units of measure and provide a view to users containing the other units as per the needs.
+10. YTD should be handled at BI layer rather than storing in Fact Tables.
+11. Never join two Fact Tables , instead use drilling across technique and sort-merge them later.
+12. SCD Type 2 in Fact Tables to capture timespan.
+13. Late Arriving Facts if most current dimensional context does not match incoming row.
+
+## Advanced Dimension Table Techniques
