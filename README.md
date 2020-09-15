@@ -7,7 +7,7 @@
 :white_check_mark: [SQL](https://github.com/sakshi1303/InterviewPreparation/blob/master/SQL/sql.md)
 
 
-:black_square_button: DWH
+:white_check_mark: [DWH](https://github.com/sakshi1303/InterviewPreparation/tree/master/DataWarehousing)
 
 
 :white_check_mark:[Data Modeling](https://github.com/sakshi1303/InterviewPreparation/tree/master/DataModeling)
