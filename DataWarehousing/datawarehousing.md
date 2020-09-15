@@ -35,3 +35,22 @@
 12. Various low cardinality flags or indicators can be grouped together and placed in a single JUNK dimensions rather than having separate dimemsions for each of them. This is also known as Transaction Profile Dimension.
 13. Snowflake dimension is normalised hieararchical multilevel dimensions which can negatively impact performance and contains exactly same information as that of flattened denormalised dimensions.
 14. Outtrigger dimension contains reference to another dimension table. Eg. bank account dimension can reference another dimension containing date when account was opened.
+
+## Slowly Changing Dimension Attributes
+
+1. Type 0: Keep Original and do not change anything.
+2. Type 1: Overwrite and update the original values.
+3. Type 2: Maintain History using 3 arributes - effective from date, effective to date and current indicator.
+4. Type 3: Type 2 along with an additional column to previous/latest values.
+5. Type 4: When few dimensions are frequently changing then split them to mini-dimension. Primay keys of both the dimensions are foreign keys to associated facts.
+6. Type 5: Adding a Type 1 reference to mini-dimension in the base dimension(Type 4 + Type 1). A separate table/view in presentation layer which contains both mini & base dimension.
+7. Type 6: Type 2 along another column for storing current values like Type 3.
+8. Type 7: Hybrid technique for Type 5 or Type 6 views. When current values are considered, join fact table with durable key and for historical values, join fact table with surrogate primary key. These act as two separate views to BI applications.
+
+## Dealing with Positional Hierarchies
+
+1. Fixed Depth Positional Hierarchies - A fixed depth hierarchy is a series of many-to-one relationships, such as product to brand to category to department. This uses a separate positional attributes in dimension table for fast query performance.
+2. Slightly Ragged/Variable Depth Hierarchies - Introduce separate dimension attributes for maximum number of levels to convert it to fixed-depth positional hierarchy.
+3. Ragged/Variable Depth Hierarchies with Hierarchy Bridge Tables - Add specially designed bridge table which contains record for every possible path/level in ragged hierarchy.
+4. Ragged/Variable Depth Hierarchies with Pathstring Attributes - Do not use bridge table rather add a pathstring attribute which contains complete path description from highest node down to the node described by that particular dimension row.
+
