@@ -16,7 +16,7 @@
 :white_check_mark: [Python](https://github.com/sakshi1303/InterviewPreparation/blob/master/Python/python.md)
 
 
-:black_square_button: AWS
+:white_check_mark: [AWS](https://github.com/sakshi1303/InterviewPreparation/blob/master/AWS/awsredshift.md)
 
 
 :black_square_button: Big Data
