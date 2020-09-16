@@ -71,3 +71,25 @@
 13. Late Arriving Facts if most current dimensional context does not match incoming row.
 
 ## Advanced Dimension Table Techniques
+
+1. Dimension-to-Dimension Table Joins should be avoided instead place foreign key in fact table as it can cause excessive growth of one or the other dimension 
+2. Multivalued Dimensions must be attached to fact table using group dimension key to bridge tables. For example a patient diagnosed with multiple ailments.
+3. A multivalued bridge table to be used with SCD Type 2. 
+4. Behavior Tag Time Series
+5. Behavior Study Groups which consists only of customers durable key.
+6. Aggregated Facts as dimension attributes such as filtering on all customers who spent over a certain amount.
+7. Dynamic Value Bands is putting varying size range in a dimension and to be implemented at report level instead during ETL processing. 
+8. Freeform texts to be stored in dimensions with coressponding foreign key in fact table.
+9. Multiple time zones should be stored in fact table.
+10. Measure type dimensions generally not recommended.
+11. Step dimension is used at determine current step and how many steps are required to complete the session.
+12. Hot swappable dimensions are used when the same fact table is alternatively paired with different copies of the same dimension.
+13. Abstract generic dimension should be avoided in dimensional modeling.
+14. Audit dimensions are metadata columns like insert/update time esp. useful for compliance and auditing purpose.
+15. Late arriving dimensions means dimensional context has not arrived and these dimension row's has attributes that are specified as UNKNOWN. SCD Type 1 changes are done when dimensional context arrives.
+
+## Special Purpose Schemas
+
+1. Supertype and Subtype Schemas for Heterogeneous Products
+2. Real-Time Fact Tables
+3. Error event schemas where each error is the grain to maintain data quality in a datawarehouse system.
