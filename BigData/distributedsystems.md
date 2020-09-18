@@ -1,3 +1,5 @@
+## Hadoop
+
 1. Hadoop - based on Distributed Systems which is internally based on MapReduce concept.
 2. It has one master node and rest are slave nodes. These are commodity machines not SSD's.
 3. It has 3 components -
