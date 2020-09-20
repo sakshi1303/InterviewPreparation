@@ -32,3 +32,25 @@
 8. Hive & Spark talk to same metastore hence a Hive Table can be read by Spark.
 9. Cost Based Optimizer
 10. It supports Data definition Language, Data Manipulation Language, and user-defined functions.
+
+## Spark
+
+1. Spark is independent and mostly runs on top of Hadoop.
+2. Problem with Hadoop - MapReduce is slow and does batch-processing.
+3. General Unified Engine
+4. Faster as compared with other tools.
+5. Ease of programming. For example - PySpark.
+6. MapReduce , Pig, Storm (Real time Streaming) - Obselete
+7. Supports Micro - Batching and Streaming 
+8. Scheduling, Monitoring and Distribution
+9. Languages supported - Scala, Python, Java, R
+10. SparkSQL is integrated with Hive.
+11. Neo4j - NOSQL database stores in graph format
+12. Spark has no storage as it is an execution engine like MapReduce.
+13. It gets data from Hadoop if we run Spark from Hadoop.
+14. Spark also runs on Kubernetes.
+15. Docker is a container which can be installed in our local and uses OS and other processes from machine itself unlike a virtual machine which has its own OS, memory etc.
+16. Zookeeper is a service that Sparks supports which keeps information about Primary & Secondary Nodes and its coordinates health status of nodes(Active/Inactive).
+17. Spark supports multiple FileSystem like Local, Amazon S3, NOSQL, RDBMS DB etc. 
+18. Spark streaming supports Flume & Kafka.
+19. Kafka is message queue and Flume is point to point delivery of data and these services provide backup of data.
