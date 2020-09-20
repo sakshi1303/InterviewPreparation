@@ -19,3 +19,16 @@
 12. Purpose of NameNode is to store metadata about data stored in different DataNodes.
 13. If NameNode(Active Node) crashes, cluster cannot be accessed, hence, it has a backup node (Passive Node) for recovery.
 14. Tool called DistCP (Distributed Copy) is used to synchronize the two clusters (Primary & Secondary).
+
+## Hive
+
+1. Hive provides SQL-like interface to Hadoop. Hive doesnot have its own storage and uses Hadoop's Storage.
+2. It is Hadoop datawarehouse system. Data is stored in HDFS.
+3. Top-level Apache project.
+4. Hive internally writes a MapReduce Program for Hadoop to understand.
+5. It is batch processing system and not suitable for OLTP system.
+6. Hive language is called Hive Query Language (HQL).
+7. Hive MetaStore should run for Hive to communicate and stores metadata.
+8. Hive & Spark talk to same metastore hence a Hive Table can be read by Spark.
+9. Cost Based Optimizer
+10. It supports Data definition Language, Data Manipulation Language, and user-defined functions.
