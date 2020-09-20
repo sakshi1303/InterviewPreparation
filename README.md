@@ -19,7 +19,7 @@
 :white_check_mark: [AWS](https://github.com/sakshi1303/InterviewPreparation/blob/master/AWS/awsredshift.md)
 
 
-:black_square_button: Big Data
+:white_check_mark: [Big Data](https://github.com/sakshi1303/InterviewPreparation/blob/master/BigData/distributedsystems.md)
 
 
 :black_square_button: Complex Project
