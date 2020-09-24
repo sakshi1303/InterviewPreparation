@@ -15,8 +15,9 @@
 3. Action taken were -
    > - Gathered Statistics on all the tables
    > - Removing Fragmentation from all the related tables
-   > - We analysed that there were lot of INSERT INTO statements were used which is slower hence we replaced them with CREATE TABLE AS statements.
-   > - Used Temporary Tables to insert data and applied transsformations so as to improve the performance while loading main tables.
+   > - Replaced all the Staging Tables with Temporary Tables and applied GATHER STATS in all intermediate steps as stats were gathered with 0 records but there were miilions of records while the process ran making the queries slower.
+   > - We were able to reduce the performance by 50% but it was not up to the mark.
+   > - We further analysed that there were lot of INSERT INTO statements were used which is slower hence we replaced them with CREATE TABLE AS statements using dynamic sql's.
  4. Result was that we were able to achieve the performance within expected time which is 1 hour.  
 
 ## Project 3 - Materialised Views
@@ -27,4 +28,5 @@
    > - Created Function based Index on related column
    > - Created a Global Temporary Table to insert data at runtime and fetch the results from the same.
    > - When above approach didn't work, we analysed the table and found that there are around 250+ columns in the table and we required only few. We then created a Materialised View only required columns and used it to fetch the results.
+   > - Because Oracle has row-based storage unlike Redshift so it does a FULL TABLE scan with all the columns hence taking more time.
 4. Result was that we were able to reduce the performance to a great extent and got the results within milliseconds.
