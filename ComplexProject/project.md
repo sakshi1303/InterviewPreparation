@@ -15,7 +15,7 @@
 3. Action taken were -
    > - Gathered Statistics on all the tables
    > - Removing Fragmentation from all the related tables
-   > - Replaced all the Staging Tables with Temporary Tables and applied GATHER STATS in all intermediate steps as stats were gathered with 0 records but there were miilions of records while the process ran making the queries slower.
+   > - Applied GATHER STATS in all intermediate steps as stats were gathered with 0 records but there were millions of records actually while the process ran to load data in Staging Tables hence making the queries slower.
    > - We were able to reduce the performance by 50% but it was not up to the mark.
    > - We further analysed that there were lot of INSERT INTO statements were used which is slower hence we replaced them with CREATE TABLE AS statements using dynamic sql's.
  4. Result was that we were able to achieve the performance within expected time which is 1 hour.  
