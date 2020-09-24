@@ -10,7 +10,14 @@
 
 ## Project 2 - Netting Example
 
-#### Situation - 
+1. Situation was one of our Monthly Netting process used to take around 24 hours to complete the overall activity.
+2. Task was to improve the performance and get the results within 1 hour.
+3. Action taken were -
+   > - Gathered Statistics on all the tables
+   > - Removing Fragmentation from all the related tables
+   > - We analysed that there were lot of INSERT INTO statements were used which is slower hence we replaced them with CREATE TABLE AS statements.
+   > - Used Temporary Tables to insert data and applied transsformations so as to improve the performance while loading main tables.
+ 4. Result was that we were able to achieve the performance within expected time which is 1 hour.  
 
 ## Project 3 - Materialised Views
 
