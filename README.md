@@ -22,7 +22,7 @@
 :white_check_mark: [Big Data](https://github.com/sakshi1303/InterviewPreparation/blob/master/BigData/distributedsystems.md)
 
 
-:black_square_button: Complex Project
+:white_check_mark: [Complex Project](https://github.com/sakshi1303/InterviewPreparation/blob/master/ComplexProject/project.md)
 
 
-:black_square_button: Current Project
+:white_check_mark: [Current Project](https://github.com/sakshi1303/InterviewPreparation/blob/master/CurrentProject/currentproject.md)
