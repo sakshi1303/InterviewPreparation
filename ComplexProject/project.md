@@ -10,7 +10,7 @@
 
 ## Project 2 - Netting Example
 
-1. Situation was one of our Monthly Netting process used to take around 24 hours to complete the overall activity which comprised of 15-20 complex sql queries.
+1. Situation was one of our Monthly Reporting process used to take around 24 hours to complete the overall activity which comprised of 15-20 complex sql queries.
 2. Task was to improve the performance and get the results within 1 hour.
 3. Action taken were -
    > - Gathered Statistics on all the tables
