@@ -56,6 +56,18 @@ select * from t ;
 
 #### No of employees inside the office
 
+```sql
+DROP TABLE TIMESHEETS;
+CREATE TABLE TIMESHEETS(empid NUMBER , timestamps NUMBER , in_out VARCHAR2(50));
+
+insert into timesheets values(1,830,'IN');
+insert into timesheets values(2,900,'IN');
+insert into timesheets values(3,930,'IN');
+insert into timesheets values(1,945,'OUT');
+insert into timesheets values(2,946,'OUT');
+insert into timesheets values(4,1000,'IN');
+```
+
 <details>
 <summary>Answer</summary>
 
