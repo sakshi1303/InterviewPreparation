@@ -14,6 +14,6 @@
 |Searching a file in filesystem|Required|Done|
 |Palindrome|Required|Done|
 |Multithreading|Required|Done|
-|Multiprocessing|Good to have||
-|Pool|Good to have||
-|List Comprehensions|Good to have||
+|Multiprocessing|Good to have|Done|
+|Pool|Good to have|Done|
+|List Comprehensions|Good to have|Done|
