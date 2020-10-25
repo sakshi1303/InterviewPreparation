@@ -2,9 +2,9 @@
 
 |Topics|Feature|Status|
 |----|----|----|
-|Speeding Up Data using Multithreading|Required||
-|Netting Example|Required||
-|Materalised View Example|Required||
+|Speeding Up Data using Multithreading|Required|Done|
+|Netting Example|Required|Done|
+|Materalised View Example|Required|Done|
 |Performance Suite|Good to have||
-|ETL Framework|Good to have||
+|ETL Framework|Good to have|Done|
 |ETL Framework with Job Scheduling|Great to have||
