@@ -1194,7 +1194,8 @@ class Consumer(Thread) :
             qry = """ CREATE TABLE TEST_HISTORY_""" + str(p_start_date[-4:0]) + """ AS 
                       SELECT t.*, RANK() OVER (PARTITION BY TEST_DATE ORDER BY TEST_NAME) AS RN
                       FROM TEST
-                      WHERE TEST_DATE BETWEEN TO_DATE('{p_start_date}', 'DD-MON-YYYY') AND TO_DATE('{p_end_date}', 'DD-MON-YYYY') 
+                      WHERE TEST_DATE BETWEEN TO_DATE('{p_start_date}', 'DD-MON-YYYY') 
+                      AND TO_DATE('{p_end_date}', 'DD-MON-YYYY') 
                       """.format(p_start_date=p_start_date, p_end_date=p_end_date)
             conn = cx.connect(username, pwd, host) 
             cursor = conn.cursor()
@@ -1279,3 +1280,68 @@ if __name__ == '__main__':
     p.join()
     
 ```
+
+## List Comprehension
+
+#### Example 1
+
+```python
+
+h_letters = [letter for letter in 'human']
+print(h_letters)
+
+```
+<details>
+<summary>Answer</summary>
+['h', 'u', 'm', 'a', 'n']
+</details>
+
+#### Example 2
+
+```python
+number_list = [ x for x in range(20) if x % 2 == 0 ]
+print(number_list)
+```
+
+<details>
+<summary>Answer</summary>
+[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+</details>
+
+#### Example 3
+
+```python
+num_list = [y for y in range(100) if y % 2 == 0 if y % 5 == 0]
+print(num_list)
+
+```
+
+<details>
+<summary>Answer</summary>
+[0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
+</details>
+
+#### Example 4
+
+```python
+obj = ["Even" if i % 2  == 0 else "Odd" for i in range(10)]
+print(obj)
+```
+
+<details>
+<summary>Answer</summary>
+['Even', 'Odd', 'Even', 'Odd', 'Even', 'Odd', 'Even', 'Odd', 'Even', 'Odd']
+</details>
+
+#### Example 5
+
+```python
+matrix = [[1,2], [3,4], [5,6], [7,8]]
+transpose = [[row[i] for row in matrix] for i in range(2)]
+print(transpose)
+```
+<details>
+<summary>Answer</summary>
+[[1, 3, 5, 7], [2, 4, 6, 8]]
+</details>
+
