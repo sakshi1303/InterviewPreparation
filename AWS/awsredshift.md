@@ -92,3 +92,32 @@
 10. Add predicates to filter tables that participate in joins even if resultset is same so that it skips scanning data blocks not required, the participating joining column is not required to be added as filter.
 11. Use Sort Keys in GROUP BY clause for efficient aggregation.
 12. If GROUP BY & ORDER BY clause both are used in a query, then order of columns in both the clause should be same.
+
+## Designing Tables
+
+1. Choosing a column compression type - Compression is a column-level operation that reduces the size of data when it is stored.
+2. It reduces the amount of disk I/O and therefore improves query performance.
+2. Use COPY command to apply automatic compression.
+3. For manual compression encodings, apply ANALYZE COMPRESSION.
+4. Compression encodings are RAW (no compression), AZ64, Byte dictionary, Delta, LZO, Mostlyn, Run-length, Text, Zstandard.
+5. Choosing a data distribution style - Redshift distributes the rows of the table to each of the compute nodes as per tables distribution style.
+6. When a query is run, query optimizer redistributes the rows (to compute nodes) to perform joins and aggregations.
+7. The aim of selecting a table distribution style is to minimize the impact of the redistribution step by locating the data where it needs to be before the query is executed.
+8. Distribution styles are AUTO, EVEN, KEY & ALL.
+9. AUTO - Automatically assigned by Redshift based on size of table data.
+10. EVEN - Assigned in a Round Robin Fashion. Appropriate when table does not participate in Joins.
+11. KEY - Distribution is based on values in one column.
+12. ALL - Entire Table is distributed to every node.
+13. Evaluate Query Patterns by identifying query execution time, how much computing resources it consumes, how often query is executed, and how disruptive it is to other queries and database operations. 
+14. Identify tables that are used by most costly queries and evaluate their role in query execution.
+15. Designating distribution styles -
+> - Specify the primary key and foreign keys for all your tables.
+> - Distribute the fact table and its largest dimension table on their common columns.
+> - Designate distribution keys for the other dimension tables.
+> - Evaluate whether to change some of the dimension tables to use ALL distribution.
+> - Use EVEN distribution for the remaining tables.
+16. Choosing sort keys - Information about sort key is passed to query planner to create optimal plan.
+17. For range restricted predicate, query processor can skip large number of blocks during table scans.
+18. Compound Sort Key - all columns listed in Sort Key definition.
+19. Interleaved sort key - Gives equal weight to each column or subset of columns in sort key.
+
