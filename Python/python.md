@@ -1203,3 +1203,77 @@ class Consumer(Thread) :
             conn.close()
             self.queue.task_done()
 ```
+
+## Multiprocessing
+
+#### Example 1
+
+```python
+import multiprocessing as mp
+
+def foo(q):
+    q.put('hello')
+    
+if __name__ == '__main__':
+    mp.get_start_method('spawn')
+    q = mp.Queue()
+    p = mp.Process(target=foo, args=(q,))
+    p.start()
+    print(q.get())
+    p.join()
+    
+```
+
+#### Example 2
+
+```python
+import multiprocessing as mp
+
+def foo(q):
+    q.put('hello')
+    
+if __name__ == '__main__':
+    ctx = mp.get_context('spawn')
+    q = ctx.Queue()
+    p = ctx.Process(target=foo, args=(q,))
+    p.start()
+    print(q.get())
+    p.join()
+
+```    
+#### Example 3
+
+```python
+from multiprocessing import Pool
+
+def f(x):
+    return x*x
+
+if __name__ == '__main__':
+    with Pool(5) as p:
+        print(p.map(f, [1,2,3]))
+
+```
+#### Example 4
+
+```python
+from multiprocessing import Process
+import os
+
+def info(title):
+    print(title)
+    print('module name:', __name__)
+    print('parent process', os.getppid)
+    print('process id:', os.getpid())
+
+def f(name):
+    info('function f')
+    print('hello', name)
+
+if __name__ == '__main__':
+    info('main line')
+    p = Process(target=f, args=('bob',))
+    p.start()
+    p.join()
+    
+```
