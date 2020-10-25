@@ -6,5 +6,5 @@
 |Netting Example|Required|Done|
 |Materalised View Example|Required|Done|
 |Performance Suite|Good to have||
-|ETL Framework|Good to have|Done|
+|ETL Framework|Good to have||
 |ETL Framework with Job Scheduling|Great to have||
