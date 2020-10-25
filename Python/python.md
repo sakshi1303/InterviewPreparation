@@ -1241,7 +1241,9 @@ if __name__ == '__main__':
     p.join()
 
 ```    
-#### Example 3
+## Pool
+
+#### Example 1
 
 ```python
 from multiprocessing import Pool
@@ -1254,7 +1256,7 @@ if __name__ == '__main__':
         print(p.map(f, [1,2,3]))
 
 ```
-#### Example 4
+#### Example 2
 
 ```python
 from multiprocessing import Process
