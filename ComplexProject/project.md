@@ -8,6 +8,17 @@
 6. Together with these modules, we can speed up the processing of large volumes of data and achieve best results in terms of performance. It is also less prone to errors like memory issues etc.
 7. Example case and Python code can be accessed from https://github.com/sakshi1303/Python/blob/master/MultiThreading/MultiThreading.md
 
+STAR Format -
+
+1. Situation was to load around 10 TB of data and apply transformations on it. The initial process implemented took 1.5 hours for one effective day, 1 year was expected around 1 month and total estimation on 10 years of data was 10 months approx.
+2. Task was to improve the performance and bring it down to a week's time.
+3. Action taken were -
+   > - Use of Python's multithreading module along with Queue module to achieve concurrency.
+   > - One day load was completing in 20 mins (from 1.5 hrs)
+   > - On analysing further, we found that there were too many INSERT INTO SELECT statements which was then replaced with CREATE TABLE AS stmts using dynamic sql's.
+   > - Now, the load was taking approx 5 mins and 1 year data completed in approx. 30 hours.
+ 4. Result was that we were able to achieve and complete the load in 8 days.  
+
 ## Project 2 - Netting Example
 
 1. Situation was one of our Monthly Reporting process used to take around 24 hours to complete the overall activity which comprised of 15-20 complex sql queries.
