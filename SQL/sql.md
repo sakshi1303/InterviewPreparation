@@ -1687,5 +1687,38 @@ from orders o
 where (o.product_id = 'P001' or o.product_id = 'P002') 
  and (o.product_id = 'P002' or o.product_id = 'P001');
 ```
- 
 </details>
+
+## We have a requirement to setup a data model for Online Flight booking system. There will be reporting layer will be built on top of this, which will be accessed by our customers for the analysis and reporting metrics.(Provided Expedia as example) On data modelling he was excellent. As soon I gave the problem , he was able to neatly identify all the entity, keys, relation between and explain each of those in detail.  
+
+## Flight Booking System
+
+```sql
+create table flight
+(name varchar2(100),
+dep varchar2(20),
+arr varchar2(20),
+dep_date date,
+booking_id number,
+flight_no varchar2(20),
+cost number
+);
+
+insert into flight values ('CustomerA', 'SEA', 'NJ', TO_DATE('2019-01-01 01:00:00','YYYY-MM-DD HH:MI:SS'), '100', 'A100', 200);
+insert into flight values ('CustomerA', 'NJ', 'SEA', TO_DATE('2019-03-05 02:00:00','YYYY-MM-DD HH:MI:SS'), '100', 'A101', 200);
+insert into flight values ('CustomerD', 'NJ', 'Texas', TO_DATE('2019-03-07 01:15:00','YYYY-MM-DD HH:MI:SS'), '101', 'A101', 300);
+insert into flight values ('CustomerD', 'Texas', 'SEA', TO_DATE('2019-02-07 03:00:00','YYYY-MM-DD HH:MI:SS'), '101', 'A101', 100);
+insert into flight values ('CustomerD', 'SEA', 'NJ', TO_DATE('2019-02-07 03:00:00','YYYY-MM-DD HH:MI:SS'), '101', 'A101', 200);
+insert into flight values ('CustomerD', 'SEA', 'Texas', TO_DATE('2019-02-08 05:00:00','YYYY-MM-DD HH:MI:SS'), '102', 'A102', 400);
+insert into flight values ('CustomerD', 'Texas', 'SEA', TO_DATE('2019-02-19 05:10:00','YYYY-MM-DD HH:MI:SS'), '102', 'A103', 500);
+insert into flight values ('CustomerD', 'Texas', 'SEA', TO_DATE('2019-02-19 02:10:10','YYYY-MM-DD HH:MI:SS'), '103', 'A103', 200);
+insert into flight values ('CustomerD', 'SEA', 'Texas', TO_DATE('2019-02-20 01:11:00','YYYY-MM-DD HH:MI:SS'), '104', 'A104', 100);
+insert into flight values ('CustomerE', 'SEA', 'Texas', TO_DATE('2019-02-20 04:10:00','YYYY-MM-DD HH:MI:SS'), '105', 'A104', 200);
+insert into flight values ('CustomerE', 'Texas', 'CA', TO_DATE('2019-02-21 03:10:10','YYYY-MM-DD HH:MI:SS'), '105', 'A105', 100);
+insert into flight values ('CustomerF', 'SEA', 'CA', TO_DATE('2020-01-20 05:10:01','YYYY-MM-DD HH:MI:SS'), '106', 'A106', 300);
+```
+
+## List all the passengers who completed round trip within a month time
+
+## Write a query to identify number of transits taken by passenger for each booking.
+#### Expected output: booking_id, passenger_name, number_of_transits
