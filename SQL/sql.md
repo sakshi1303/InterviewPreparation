@@ -22,6 +22,12 @@ from dist d1 left outer join dist d2
               and d1.dest = d2.src
 where d1.src <= d2.src;
 ```
+```sql
+select  distinct d1.src, d1.dest
+from dist d1 join dist d2 
+on d1.src = d2.dest
+where d1.src < d2.src
+```
 </details>
 
 #### Distinct Cities
