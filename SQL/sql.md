@@ -1720,5 +1720,17 @@ insert into flight values ('CustomerF', 'SEA', 'CA', TO_DATE('2020-01-20 05:10:0
 
 ## List all the passengers who completed round trip within a month time
 
+<details>
+  <summary>Answer</summary>
+
+```sql
+select * 
+from flight f1 join flight f2
+on f1.name = f2.name and f1.booking_id = f2.booking_id
+and f1.dep = f2.arr
+and f1.dep_date < f2.dep_date
+```
+</details>
+
 ## Write a query to identify number of transits taken by passenger for each booking.
 #### Expected output: booking_id, passenger_name, number_of_transits
