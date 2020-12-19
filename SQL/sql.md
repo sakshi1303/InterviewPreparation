@@ -1730,6 +1730,15 @@ on f1.name = f2.name and f1.booking_id = f2.booking_id
 and f1.dep = f2.arr
 and f1.dep_date < f2.dep_date
 ```
+
+```
+select f.* from (
+select name, booking_id, dep_date, dep, arr,
+first_value(dep) over (partition by name,booking_id order by dep_date ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) fv,
+last_value(arr) over (partition by name,booking_id order by dep_date ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) lv
+from flight f1
+) f where fv = lv;
+```
 </details>
 
 ## Write a query to identify number of transits taken by passenger for each booking.
