@@ -1731,7 +1731,7 @@ and f1.dep = f2.arr
 and f1.dep_date < f2.dep_date
 ```
 
-```
+```sql
 select f.* from (
 select name, booking_id, dep_date, dep, arr,
 first_value(dep) over (partition by name,booking_id order by dep_date ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) fv,
