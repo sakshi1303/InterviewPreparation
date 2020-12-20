@@ -276,6 +276,60 @@ where dd.month_num = 1
 
 </details>
 
+<details>
+  <summary>Answer</summary>
+
+```sql
+10 JAN
+11 JAN
+----------   12 JAN                      
+13 JAN                                   
+14 JAN                                    
+15 JAN
+16 JAN
+17 JAN 
+18 JAN
+
+FACT -- DIRECTLY INSERT THAT SNAPSHOT
+
+ORDER DATE     PROCESSING DAY
+11 JAN         11 JAN
+-------------- 12 JAN  
+11 JAN         14 JAN
+
+DIMENSION -
+
+12 -- NEVER CAME LATER
+12 --- ALREADY CAME
+
+STG
+
+FUND_ID  PROCESSING_DAY   
+1        12 JAN
+2        12 JAN  
+3        12 JAN
+
+MAIN
+
+FUND_ID  PROCESSING_DAY
+
+1        18 JAN 
+2        11 JAN          
+4        11 JAN         
+5        13 JAN 
+
+UPDATE MAIN M1
+SELECT 
+FROM STG M1 JOIN MAIN M2 ON M1.FUND_ID = M2.FUND_ID
+WHERE STG.PROCESSING_DAY > MAIN.PROCESSING_DAY
+
+INSERT INTO MAIN M1
+SELECT 
+FROM STG M1 LEFT OUTER JOIN MAIN M2
+WHERE M2.FUND_ID IS NULL
+```
+</details>
+
 ## How to handle late arriving dimensions ?
 
 <details>
