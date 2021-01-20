@@ -1743,3 +1743,14 @@ from flight f1
 
 ## Write a query to identify number of transits taken by passenger for each booking.
 #### Expected output: booking_id, passenger_name, number_of_transits
+
+```sql
+
+select * -- booking_id, count(*)
+from (
+select f.* , rank() over (partition by booking_id order by dep_date) as rn
+from flight f
+) where rn > 2
+group by booking_id;
+
+```
