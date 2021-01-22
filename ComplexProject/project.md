@@ -51,5 +51,15 @@ STAR Format -
    > - Fetch all the entities which were present in latest effective date.
    > - Now subtract the entities as ALL - Entities from latest Effective date.
    > - We have this reduced data set which are not present in latest date data on which we will apply RANK() Function now.
- 4. Result was that we improved the performance remarkbly.
+ 4. Result was that we improved the performance remarkably.
    
+## Project 5 - Unusable Partitioned Index
+
+1. Situation was when my colleague was given a requirement to improve a reporting query. She created required Indexes but it did't work as expected and she was struggling to find the root cause. She highlighted the situation in our Daily Stand-Up meet and I thought of helping her out.
+2. Task was to find the root cause and improve the performance.
+3. Action taken were -
+   > - Got all the required query and indexes created.
+   > - Checked the EXPLAIN PLAN of query and found that index was not picking up by the optimiser.
+   > - I further anlaysed and found that Partitioned Index for few of the partitioned dates were UNUSABLE.
+   > - I rebuild those Indexes and it started picking up by the optimiser.
+ 4. Result was we were able to achieve the required performance.
