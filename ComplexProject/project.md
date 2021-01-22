@@ -41,3 +41,15 @@ STAR Format -
    > - When above approach didn't work, we analysed the table and found that there are around 250+ columns in the table and we required only few. We then created a Materialised View only required columns and used it to fetch the results.
    > - Because Oracle has row-based storage unlike Redshift so it does a FULL TABLE scan with all the columns hence taking more time.
 4. Result was that we were able to reduce the performance to a great extent and got the results within milliseconds.
+
+## Project 4 - Reduce dataset for Rank Function
+
+1. Situation was to get data for all the entities for a period of 90 days/Quarter whose data may/may not be present in latest effective date. This was implemented using RANK() Function but query was taking huge amount of time.
+2. Task was to reduce the performance and get the data in minimum possible time.
+3. Action taken were -
+   > - Extract ALL DISTINCT Entity Id's
+   > - Fetch all the entities which were present in latest effective date.
+   > - Now subtract the entities as ALL - Entities from latest Effective date.
+   > - We have this reduced data set which are not present in latest date data on which we will apply RANK() Function now.
+ 4. Result was that we improved the performance remarkbly.
+   
