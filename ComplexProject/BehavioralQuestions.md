@@ -34,8 +34,8 @@ Uber/Netflix
 ### Case 2
 
 > - Situation was there was a requirement given by the customer where they had limited set of information or they were not exactly sure of the details required to generate one of the report. My current organisation is an asset management company and our customers were doing some analysis before brexit. They wanted to generate the report for the analysis and all the stakeholders were having different opinion and had conflicts among them.
-> - Task was to provide the attributes on a high level initially and keep on enhancing the report with this initail base report.
-> -  With all my experience and analysis, I came up with a report where I added most of the attributes of the entity along with other details like last 7 days average, 1 month average and quarterly average performance of different funds. Additionally, I gave them other details like transactions , valuations etc.
+> - Task was to provide the attributes on a high level initially and keep on enhancing the report with this initial base report.
+> -  With all my experience and analysis, I came up with a report where I added frequently used attributes of the entity along with details like last 7 days average, 1 month average and quarterly average performance of different funds. Additionally, I gave them other details like transactions, valuations etc.
 > - When I shared the report with them, they were able to understand and clearly identify the pattern in the change in these components.
 > - We further dicussed on the report and later it was only matter of adding more attributes and reducing few of them.
 > - This not only helped in understanding and identifying things they were looking for but saved their time as they were involved in other BAU activities and there was too much pressure on them.
@@ -43,12 +43,17 @@ Uber/Netflix
 
 ### Case 3
 
-> - In my previous organisation, I was working with one of the investment banking client. There was credit officers who use to set up limits for their clients based of different parameters like Credit Ratings, they either use to increase those limits or stop any further trading.
-> - Task to provide an automated report which will help the Credit Officers decide it based on transactions/ultilisation/exposure on the limits set up.
-> - I created a report based on these facts data and also flagged those transactions where ultilisation/exposure got suddenly increased over a period of time.
-> - Not only this, we added the previous actions taken by the credit officers in the report for their reference.
+> - In my previous organisation, I was working with one of the investment banking client. There was credit officers who use to set up limits for their clients based of different parameters like Credit Ratings, they either use to increase those limits or stop any further trading i.e. revise the credit limits.
+> - Task was to reduce the response time for setting up the credit limit. 
+> - I came up with an approach to create an automated report which will help the Credit Officers decide based on transactions/ultilisation/exposure on the limits set up.
+> - Firstly, I created the query to get net change in utlisitation for few(hundreds) clients and average came up to be 20% which became the initial benchmark for the report.
+> - I then created a report based on these facts data and also flagged those transactions where ultilisation/exposure got suddenly increased over a period of time.
+> - Not only this, we added the previous actions taken by the credit officers in the report for their reference and generated sort of recommendations that the limit is going to be breached as the exposure is now close to limit.
 > - This helped the credit officers make quick decisions along with other parameters they consider to increase/decrease the limit or stop the process.
-> - Initially the success rate of this report was 35% approx but in fewer months it increased to 60%. The credit officers were very happy with the report which was later showcased in one of the townhall and our team was highly appreciated for the same.
+> - Finally the response time came from 14 days to 7 days. 
+> - Couple of months later we revised the benchmark % by removing outliers. Few months later, we generated the report for different portfolios.
+> - Initially the success rate of this report was 35% approx but in fewer months it got increased to 60%. 
+> - The credit officers were very happy with the report which was later showcased in one of the townhall and our team was highly appreciated for the same.
 > - We later thought to completely automate the process by adding the feature at UI level but I left the organisation by then.
 
 ## Situation when you went against the stakeholders and told them you were INCORRECT and taken charge and provided your solution.
