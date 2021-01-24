@@ -34,9 +34,9 @@ Uber/Netflix
 - Situation was where we had to create a Strategic Client Dashboard at top most level entity i.e. at Ultimate Parent Company Level.
 - Task was to analyse the data at one lower level and get the aggregated view for Company level.
 - Action taken were
-    > - In the initial discussion and analysis, we found that since we have the view at one level below what we wanted, we can get aggregate and get the required data which was also matching for few sample cases. 
-    > - Later as and when we started analying with more sets, we found that the Ultimate Parent level structure data cannot be met by just aggregation. 
-    > - To solve it, we created a mapping table to store the entities and their hierarchical relationships and created a view over over lower level.
+    > - In the initial discussion and analysis, we found that since we have the view at one level below what we wanted, we can get aggregate and get the required data which was also matching for few sample cases. I told them at the very same time that the Ultimate Parent level structure data cannot be met by just aggregation but no one agreed.
+    > - Later I did some analysis with more sets, I found and highlighted those cases at agggregated and individual level on which they agrred finally.
+    > - To solve it, I created a mapping table to store the entities and their hierarchical relationships and created a view over over lower level.
     > - With this we were able to solve the data issues and mismatches but the performance of query was not upto the mark.
     > - I then created a materialised view instead of the view and the problem got solved.
 - Result was that we were not able to match the requirements but the turn around time was good. 
