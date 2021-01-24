@@ -51,7 +51,7 @@ Uber/Netflix
 > - Not only this, we added the previous actions taken by the credit officers in the report for their reference and generated sort of recommendations that the limit is going to be breached as the exposure is now close to limit.
 > - This helped the credit officers make quick decisions along with other parameters they consider to increase/decrease the limit or stop the process.
 > - Finally the response time came from 14 days to 7 days. 
-> - Couple of months later we revised the benchmark % by removing outliers. Few months later, we generated the report for different portfolios.
+> - Couple of months later we revised the benchmark % by revisting the process. Few months later, we generated the report for different portfolios.
 > - Initially the success rate of this report was 35% approx but in fewer months it got increased to 60%. 
 > - The credit officers were very happy with the report which was later showcased in one of the townhall and our team was highly appreciated for the same.
 > - We later thought to completely automate the process by adding the feature at UI level but I left the organisation by then.
