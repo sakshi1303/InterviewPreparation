@@ -41,6 +41,16 @@ Uber/Netflix
 > - This not only helped in understanding and identifying things they were looking for but saved their time as they were involved in other BAU activities and there was too much pressure on them.
 > - They were finally very happy with the report and I was appreciated by the PM's and other stakeholders.
 
+### Case 3
+
+> - In my previous organisation, I was working with one of the investment banking client. There was credit officers who use to set up limits for their clients based of different parameters like Credit Ratings, they either use to increase those limits or stop any further trading.
+> - Task to provide an automated report which will help the Credit Officers decide it based on transactions/ultilisation/exposure on the limits set up.
+> - I created a report based on these facts data and also flagged those transactions where ultilisation/exposure got suddenly increased over a period of time.
+> - Not only this, we added the actions taken by the credit officers based on all previous actions taken.
+> - This helped the credit officers make quick decisions along with other parameters they consider to increase/decrease the limit or stop the process.
+> - Initially the success rate of this report was 35% approx but in fewer months it increased to 60%. The credit officers were very happy with the report which was later showcased in one of the townhall and our team was highly appreciated for the same.
+> - We later thought to completely automate the process by adding the feature at UI level but I left the organisation by then.
+
 ## Situation when you went against the stakeholders and told them you were INCORRECT and taken charge and provided your solution.
 
 - Situation was where we had to create a Strategic Client Dashboard at top most level entity i.e. at Ultimate Parent Company Level.
@@ -56,6 +66,7 @@ Uber/Netflix
 ## Calculated Risk
 
 ## Limited set of information
+
 
 
 
